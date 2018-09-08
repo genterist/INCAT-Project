@@ -319,28 +319,27 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Bare Demo of IEEEtran.cls\\ for IEEE Conferences}
+\title{INCAT : Intelligence-based Cybersecurity Awareness Training}
 
 
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Michael Shell}
-\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
-Georgia Institute of Technology\\
-Atlanta, Georgia 30332--0250\\
-Email: http://www.michaelshell.org/contact.html}
+\author{\IEEEauthorblockN{Tam Nguyen}
+\IEEEauthorblockA{North Carolina State University\\
+tam.nguyen@ncsu.edu\\
+https://www.linkedin.com/in/tamcs/}
 \and
-\IEEEauthorblockN{Homer Simpson}
-\IEEEauthorblockA{Twentieth Century Fox\\
-Springfield, USA\\
-Email: homer@thesimpsons.com}
+\IEEEauthorblockN{Your name}
+\IEEEauthorblockA{North Carolina State University\\
+Email\\
+web if desired}
 \and
-\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
-\IEEEauthorblockA{Starfleet Academy\\
-San Francisco, California 96678--2391\\
-Telephone: (800) 555--1212\\
-Fax: (888) 555--1212}}
+\IEEEauthorblockN{Your name}
+\IEEEauthorblockA{North Carolina State University\\
+Email\\
+web if desired}
+}
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -379,8 +378,8 @@ Fax: (888) 555--1212}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The abstract goes here.
-Hi just testing this!1
+Cybersecurity training should be adaptable to evolving cyber threat landscape, be cost effective and most important of all, be integrated well with other components such as enterprise risk management, incident management, threat intelligence and so on. Unfortunately, very few cyber security training platforms can satisfy those requirements. This paper proposes a new model for conducting cyber security trainings with three main objectives: (i) training efforts are initiated by emerging relevant threats and delivered first to respective most vulnerable members (ii) each training session must be
+promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc. The model consists of a data-analytic/machine learning (DA) component and a cyber training delivery (DE) component. DE interfaces with users while DA interfaces with existing cyber security systems and/or databases. Together, DE and DA empower each other, forming a feedback loop that allow all previously-stated objectives to be met.
 \end{abstract}
 
 % no keywords
@@ -400,24 +399,30 @@ Hi just testing this!1
 
 
 
-\section{Introduction}
-% no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
+\section{Main Ideas}
+DA ( the Data Analytic) moduile will be worked on within the scope of CSC522 class and be worked on by all team members. We are nplanning to use IBM Watson analytic and other IBM cloud-based products for implementations. The core data will be based on the evolving National Vulnerability Database (https://nvd.nist.gov/).
 
-\hfill mds
- 
-\hfill August 26, 2015
+DE ( the cyber awareness DElivery module) will be worked on within the scope of CSC591 class with Tam Nguyen as the 1-man team. We are planning to use NCSU Qualtrics as the core of DE. User interactions with DE can be gathered through Amazon Mechanical Turks (periodic campaigns through out the semester)
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+The final research paper will be around 8 to 9 pages (IEEE conference format, with 30 to 40 citations) and this same paper will be submitted in both class. This combination of projects received permissions from instructors in both classes.
+
+The current main use case is as followed. At one particular moment, DA should be able to tell the severity rankings of threats. For example, the rankings can be 1. Android game 2. Apache Strut powered websites 3. MS Excel. DE should be able to construct a very short quiz targeting the most serious type of threats and based on user's profile. For example, a
+security guard may be tested on 1 while an accountant maybe tested on 3 (since s/he may use Excel a lot). DE should be able to "talk" automatically with DA about the results and from there, in combinations with other factors/metrics, the
+severity rankings of threats can be changed. That, in turn, serves as the initiator of another round of training which can be larger or smaller in scope, be targeting different types of threats, and so on.
 
 
-\subsubsection{Subsubsection Heading Here}
+\section{Main hypotheses and separation of work}
+
+\subsection{Current issues with cyber awareness training}
+Mostly for compliance
+
+Expensive or ineffective or both
+
+Awareness do not necessary translate to correct actions
+
+Can't keep up with fast-changing landscape
+
+\subsubsection{What INCAT can do}
 Subsubsection text here.
 
 
@@ -517,36 +522,6 @@ Subsubsection text here.
 
 
 
-\section{Conclusion}
-The conclusion goes here.
-Hi this is another test ....
-\cite{Kintis2017HidingAbuse}
-#####
-
-
-
-
-
-% conference papers do not normally have an appendix
-
-
-% use section* for acknowledgment
-\section*{Acknowledgment}
-
-
-The authors would like to thank...
-
-
-
-
-
-% trigger a \newpage just before the given reference
-% number - used to balance the columns on the last page
-% adjust value as needed - may need to be readjusted if
-% the document is modified later
-%\IEEEtriggeratref{8}
-% The "triggered" command can be changed if desired:
-%\IEEEtriggercmd{\enlargethispage{-5in}}
 
 % references section
 
