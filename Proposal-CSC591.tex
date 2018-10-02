@@ -312,66 +312,20 @@
 
 
 \begin{document}
-%
-% paper title
-% Titles are generally capitalized except for words such as a, an, and, as,
-% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
-% not capitalized unless they are the first or last word of the title.
-% Linebreaks \\ can be used within to get better formatting as desired.
-% Do not put math or special symbols in the title.
-\title{Bare Demo of IEEEtran.cls\\ for IEEE Conferences}
+
+\title{INCAT : Intelligence-based Cybersecurity Awareness Training\\
+- CSC591 Proposal Paper -
+}
 
 
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Michael Shell}
-\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
-Georgia Institute of Technology\\
-Atlanta, Georgia 30332--0250\\
-Email: http://www.michaelshell.org/contact.html}
-\and
-\IEEEauthorblockN{Homer Simpson}
-\IEEEauthorblockA{Twentieth Century Fox\\
-Springfield, USA\\
-Email: homer@thesimpsons.com}
-\and
-\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
-\IEEEauthorblockA{Starfleet Academy\\
-San Francisco, California 96678--2391\\
-Telephone: (800) 555--1212\\
-Fax: (888) 555--1212}}
-
-% conference papers do not typically use \thanks and this command
-% is locked out in conference mode. If really needed, such as for
-% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
-% after \documentclass
-
-% for over three affiliations, or if they all won't fit within the width
-% of the page, use this alternative format:
-% 
-%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
-%Homer Simpson\IEEEauthorrefmark{2},
-%James Kirk\IEEEauthorrefmark{3}, 
-%Montgomery Scott\IEEEauthorrefmark{3} and
-%Eldon Tyrell\IEEEauthorrefmark{4}}
-%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
-%Georgia Institute of Technology,
-%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
-%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
-%Email: homer@thesimpsons.com}
-%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
-%Telephone: (800) 555--1212, Fax: (888) 555--1212}
-%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
-
-
-
-
-% use for special paper notices
-%\IEEEspecialpapernotice{(Invited Paper)}
-
-
-
+\author{\IEEEauthorblockN{Tam Nguyen}
+\IEEEauthorblockA{North Carolina State University\\
+tam.nguyen@ncsu.edu\\
+https://www.linkedin.com/in/tamcs/}
+}
 
 % make the title area
 \maketitle
@@ -379,8 +333,8 @@ Fax: (888) 555--1212}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The abstract goes here.
-Hi just testing this!1
+Cybersecurity training should be adaptable to evolving cyber threat landscape, be cost effective and most important of all, be integrated well with other components such as enterprise risk management, incident management, threat intelligence and so on. Unfortunately, very few cyber security training platforms can satisfy those requirements. This paper proposes a new model for conducting cyber security trainings with three main objectives: (i) training efforts are initiated by emerging relevant threats and delivered first to respective most vulnerable members (ii) each training session must be
+promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc. The model consists of a data-analytic/machine learning (DA) component and a cyber training delivery (DE) component. DE interfaces with users while DA interfaces with existing cyber security systems and/or databases. Together, DE and DA empower each other, forming a feedback loop that allow all previously-stated objectives to be met.
 \end{abstract}
 
 % no keywords
@@ -398,28 +352,77 @@ Hi just testing this!1
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
+\section{Background}
+Human is the weakest link in any cyber defense strategy. 78\% of cyber incidents were caused by careless humans \cite{20172017Overview}. The process of cyber awareness training is full of challenges. First, the threat landscape is evolving rapidly with both internal factors (technology changes, business flows changed, etc) and external factors (changes in supply chain, compliance, competitors, enemies, political climates, etc) \cite{Ingalsbe2008ThreatEnd, Manadhata2011AnMetric}. To make things worst, there is no agile cooperation between cyber awareness education and other departments. 
+
+Second, knowledge is not always translated into correct actions. For example, people who know the types of phishing are not completely immune from actual phishing. Training materials are more focused on teaching the knowledge rather rather the skills of applying the knowledge. Consequently, tests are developed to test just the knowledge, in which case learners are well aware that they are being tested and consciously put their guards on. It is very hard to simulate real world scenarios.
+
+Finally, it is challenging to prepare people for potential unknown threats that have not happened yet, not mentioning cyber adversaries are incredibly creative, sometimes state sponsored.
+
+Abawajy \cite{Abawajy2014UserMethods} did a research on user preference of cyber security awareness methods of text-based, video-based and game-based among 60 participants. Even with a "low-tech" appearance, the performance of text-based education is on par with other "fancy" methods. Employees with work deadlines and projects actually prefer light-weight cyber security awareness delivery method that does not get in the way of their main jobs.
+
+Pawlowski \cite{Pawlowski2016SocialDesign} presented a way to use data analytic to map learners' perceptions toward cyber security topics. The idea is to find out what learners care most/less, what learners are missing, and what can be leveraged to motivate learners to learn more. It was discovered that learners do have good exposures to several cyber security key terms and concepts, care very much about cyber security topics that may affect them personally, while missing a lot of the bigger picture involving national cyber infrastructure and cyber terrorism.
+
+Wei \cite{Wei2017IntegratingAssessment} adopts concept mapping (CM) as a tool to enhance the teaching and evaluating of Information System courses. By analyzing the topology of student CMs, instructors can design CM-based tasks, and grade student CMs against a master CM. While it was not explicitly mentioned in the paper, comparing CM is a very interesting way to identify how the concept map of a student can be changed over time, by education and other factors.
+
+\section{Research questions and goals}
+The research team realized that there has been no research on integrating cybersecurity awareness training (CAT) with other components of a defense-in-depth strategy in a corporation. For example, there is no robust mechanism to integrate CAT with Risk management, threat modeling and even with cybersecurity operation centers.
+
+Therefore, this paper proposes the concept of a cyber awareness map which is a combination of a concept map (built from learners' perceptions about cybersecurity attack vectors), a threat map (based on the National Vulnerability Database), and an education feedback map (built from the team's quiz assessments of learners' knowledge about existing attack vectors).
+
+The project is a multi-team project separated into two main modules, one for each team in each class. DA ( the Data Analytic) module will be worked on within the scope of CSC522 class and be worked on by all team members. DE ( the cyber awareness DElivery module) will be worked on within the scope of CSC591 class with Tam Nguyen as the 1-man team. The following sections will mostly mention details relating to the CSC591 part of the project.
+
+\subsection{Research Questions}
+\begin{enumerate}
+\item What is the perception of financial/banking employees towards cyber attack vectors?\\
+(Financial/banking sector is the second most vulnerable to cybersecurity.)
+\item What is the baseline of their cyber malicious item spotting skill?\\
+(The habit of paying attention to visual cues is more important than the detailed knowledge of past exploits. This habit may help financial employees avoid future attacks.)
+\item Can we improve the malicious item spotting skill via light weight but frequent cyber awareness training?\\
+(Threat landscape is constantly changing. Light-weight assessments like Qualtric-based quizzes are faster to make, cheap and can be effective.) 
+\item How does cyber awareness training change their perceptions about cyber security attack vectors over time?\\
+(We will look for evidence of perception changes to be incorporated into DA component and the DA-DE feedback loop.)
+\end{enumerate}
+
+\subsection{Research Goals}
+\begin{enumerate}
+\item Establish a perception map of at least 10 cyber attack vectors (web, mobile, windows, iot..) as perceived by 500 financial/banking employees in the US
+\item Establish a base-line score reflecting the employees skill of spotting potential malicious area(s) within graphical interface screen-shots.
+\item Design, test, and measure a new graphic-based yet light-weight cyber awareness training and assessment system.
+\item Showing whether or not the light-weight cyber awareness training system can change the employees' perceptions toward cyber attack vectors over time.
+\item Derive several interesting insights from the cyber awareness map.
+\end{enumerate}
 
 
-\section{Introduction}
-% no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
+\section{Schedules and Deliverables}
+\subsection{Literature review - end by 15OCT}
+Research papers to be reviewed include but are not limited to:
+\begin{enumerate}
+\item User preference of cyber security awareness delivery methods \cite{Abawajy2014UserMethods}
+\item Social Representations of Cybersecurity by University Students and Implications for Instructional Design \cite{Pawlowski2016SocialDesign}
+\item Integrating Concept Mapping into Information Systems Education for Meaningful Learning and Assessment \cite{Wei2017IntegratingAssessment}
+\item Improving Attention to Security in Software Design with Analytics and Cognitive Techniques \cite{Whitmore2017ImprovingTechniques}\
+\item Security Awareness and Affective Feedback : Categorical Behaviour vs . Reported Behaviour \cite{ShepherdSecurityBehaviour}
+\item Reports Reveal Four Cyber Security Trends-and the Need for Better Cyber Security Training Awareness \cite{Supra2016ReportsAwareness}
+\item PLAYGROUND: preparing students for the cyber battleground \cite{Nielson2017PLAYGROUND:Battleground}
+\item Cybersecurity Education: Bridging the Gap Between Hardware and Software Domains \cite{Lukowiak2014CybersecurityDomains}
+\item Phishing Educational Framework \cite{RakhraAsstPHISHINGKaur}
+\item Challenges and reflections in designing Cyber security curriculum \cite{Pereira2017ChallengesCurriculum}
+\end{enumerate}
 
-\hfill mds
- 
-\hfill August 26, 2015
 
-\subsection{Subsection Heading Here}
-Subsection text here.
-
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
-
+\subsection{Base-line survey campaign - end by 20OCT}
+The survey will be Qualtric-based, has around 15 carefully crafted questions, 10 of which will be quiz questions. Survey will be peer-reviewed by security professionals from outside of the team to ensure questions make sense and are accurate. Survey will be distributed to Amazon MTurk platform. 500 entries will be expected.
+\subsection{Analyzing base-line results & Design quizzes - end by 27OCT}
+Survey results will be analyzed and be used to plot the initial perception map. Based on this map and inputs from DA team, the perception map can be upgraded into the cyber threat awareness map. 
+\subsection{Run quiz campaigns - end by 30NOV}
+Light-weight educational quizzes (maximum of 3 questions) will be distributed to the MTurkers who participated in the base-line campaign. 100 entries will be the limit for each round. At least 3 rounds will be executed.
+\subsection{Evaluating, integrating data into perception map - end by 30NOV}
+Statistics gathered from survey rounds will be gradually analyzed, logged and be reflected in the map.
+\subsection{Second base-line survey campaign - end by 05DEC}
+The same survey structure with the same question bank that were used for the initial base-line campaign will then be used again for this phase.  The survey will be made available just for the participants in the initial base-line campaign.
+\subsection{Finish research paper - end by 08DEC}
+Final research paper will be finished by 08DEC and be submitted to a suitable conference in January or February of 2019. Due to the multi-disciplinary of the paper, it can be submitted to conferences about either education, Information Technology or Cybersecurity. Raw survey data together with polished reports will also be made available via Github.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -517,36 +520,6 @@ Subsubsection text here.
 
 
 
-\section{Conclusion}
-The conclusion goes here.
-Hi this is another test ....
-\cite{Kintis2017HidingAbuse}
-#####
-
-
-
-
-
-% conference papers do not normally have an appendix
-
-
-% use section* for acknowledgment
-\section*{Acknowledgment}
-
-
-The authors would like to thank...
-
-
-
-
-
-% trigger a \newpage just before the given reference
-% number - used to balance the columns on the last page
-% adjust value as needed - may need to be readjusted if
-% the document is modified later
-%\IEEEtriggeratref{8}
-% The "triggered" command can be changed if desired:
-%\IEEEtriggercmd{\enlargethispage{-5in}}
 
 % references section
 
@@ -557,22 +530,13 @@ The authors would like to thank...
 % http://www.michaelshell.org/tex/ieeetran/bibtex/
 %\bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
-%\bibliography{IEEEabrv,../bib/paper}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,mendeley_v2.bib}
 %
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
 \def\url#1{}
-\begin{thebibliography}{1}
-
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-\end{thebibliography}
-
-
-
 
 % that's all folks
 \end{document}
