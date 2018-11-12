@@ -314,7 +314,7 @@
 \begin{document}
 
 \title{INCAT : Intelligence-based Cybersecurity Awareness Training\\
-- CSC591 Proposal Paper -
+- Interim Report -
 }
 
 
@@ -323,8 +323,7 @@
 % affiliations
 \author{\IEEEauthorblockN{Tam Nguyen}
 \IEEEauthorblockA{North Carolina State University\\
-tam.nguyen@ncsu.edu\\
-https://www.linkedin.com/in/tamcs/}
+tam.nguyen@ncsu.edu - linkedin.com/in/tamcs}
 }
 
 % make the title area
@@ -352,6 +351,15 @@ promptly executed (iii) training results must be able to provide actionable inte
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
+\section{Introduction}
+Cyber awareness training (CAT) is challenging because the knowledge domain is defined by both the defenders and the attackers. Most CATs aim at being compliant rather than proactive, and there has been no research on integrating CAT with other components of a defense-in-depth strategy in a corporation. For example, there is no robust mechanism to integrate CAT with Risk management, threat modeling and even with cybersecurity operation centers. Therefore, this paper proposes a new CAT strategy focusing on speed and efficiency.
+
+InCAT stands for "Intelligence-based Cyber Awareness Training" with the main concept of "training only on the most important emerging cyber security issues based on intelligence and for actionable intelligence." The feedback loop starts with a threat intelligence feed (IBM X-force) where the most recent cyber threats will be analyzed. Associated attack vectors (AVs) will be identified. Recent reports from the National Vulnerability Database (NVD) will be parsed and feed into machine learning models to identify the current severity of each AV. This angle will be called "Technical Severity". Also from the identified AVs, quizzes will be designed and sent to random employees (samples) within a company (population). Other machine learning models will be used to analyze responses, resulting in a list of vulnerabilities for which employees are least prepared. This angle will be called "Human Weakness". The focus of the loop's training effort will be the most urgent issue which will be calculated based on both technical severity and human weakness. Another round of quizzes will be designed on the issue, delivered, and evaluated. At this point, the loop goes back to the beginning.
+
+The main research question is about the effectiveness of this new strategy which can be broken down to: (1) Is this strategy accurate? (2) Is this strategy fast? (3) Is this strategy repeatable? In order to provide answers to those three questions, the paper plans to execute the following main mile stones. First, a detailed description of the procedure will be provided with steps, and within each step, there will be sections of precondition, execution, and post-condition. Second, the total time spent on each step such as quiz development time, machine learning model design time, time taken to finish quizzes, etc will be carefully recorded. Third, cross-checking strategies will be employed for both machine learning model quality assurance and quiz results verification. 
+
+The research goals include: (1) Able to use machine learning models to correlate employees' concepts (what they think they know), skills (what they actually know), and threat landscape (NVD reports) to identify which is the most vulnerable attack vector among the emerging attack vectors;  (2) Able to design and deliver quiz-based training materials in a short period of time;  (3) Able to prove the effectiveness of the training materials in improving the awareness relating to the vulnerable attack vector.
+
 \section{Background}
 Human is the weakest link in any cyber defense strategy. 78\% of cyber incidents were caused by careless humans \cite{20172017Overview}. The process of cyber awareness training is full of challenges. First, the threat landscape is evolving rapidly with both internal factors (technology changes, business flows changed, etc) and external factors (changes in supply chain, compliance, competitors, enemies, political climates, etc) \cite{Ingalsbe2008ThreatEnd, Manadhata2011AnMetric}. To make things worst, there is no agile cooperation between cyber awareness education and other departments. 
 
@@ -365,36 +373,8 @@ Pawlowski \cite{Pawlowski2016SocialDesign} presented a way to use data analytic 
 
 Wei \cite{Wei2017IntegratingAssessment} adopts concept mapping (CM) as a tool to enhance the teaching and evaluating of Information System courses. By analyzing the topology of student CMs, instructors can design CM-based tasks, and grade student CMs against a master CM. While it was not explicitly mentioned in the paper, comparing CM is a very interesting way to identify how the concept map of a student can be changed over time, by education and other factors.
 
-\section{Research questions and goals}
-The research team realized that there has been no research on integrating cybersecurity awareness training (CAT) with other components of a defense-in-depth strategy in a corporation. For example, there is no robust mechanism to integrate CAT with Risk management, threat modeling and even with cybersecurity operation centers.
 
-Therefore, this paper proposes the concept of a cyber awareness map which is a combination of a concept map (built from learners' perceptions about cybersecurity attack vectors), a threat map (based on the National Vulnerability Database), and an education feedback map (built from the team's quiz assessments of learners' knowledge about existing attack vectors).
-
-The project is a multi-team project separated into two main modules, one for each team in each class. DA ( the Data Analytic) module will be worked on within the scope of CSC522 class and be worked on by all team members. DE ( the cyber awareness DElivery module) will be worked on within the scope of CSC591 class with Tam Nguyen as the 1-man team. The following sections will mostly mention details relating to the CSC591 part of the project.
-
-\subsection{Research Questions}
-\begin{enumerate}
-\item What is the perception of financial/banking employees towards cyber attack vectors?\\
-(Financial/banking sector is the second most vulnerable to cybersecurity.)
-\item What is the baseline of their cyber malicious item spotting skill?\\
-(The habit of paying attention to visual cues is more important than the detailed knowledge of past exploits. This habit may help financial employees avoid future attacks.)
-\item Can we improve the malicious item spotting skill via light weight but frequent cyber awareness training?\\
-(Threat landscape is constantly changing. Light-weight assessments like Qualtric-based quizzes are faster to make, cheap and can be effective.) 
-\item How does cyber awareness training change their perceptions about cyber security attack vectors over time?\\
-(We will look for evidence of perception changes to be incorporated into DA component and the DA-DE feedback loop.)
-\end{enumerate}
-
-\subsection{Research Goals}
-\begin{enumerate}
-\item Establish a perception map of at least 10 cyber attack vectors (web, mobile, windows, iot..) as perceived by 500 financial/banking employees in the US
-\item Establish a base-line score reflecting the employees skill of spotting potential malicious area(s) within graphical interface screen-shots.
-\item Design, test, and measure a new graphic-based yet light-weight cyber awareness training and assessment system.
-\item Showing whether or not the light-weight cyber awareness training system can change the employees' perceptions toward cyber attack vectors over time.
-\item Derive several interesting insights from the cyber awareness map.
-\end{enumerate}
-
-
-\section{Schedules and Deliverables}
+\section{Methods and Results}
 \subsection{Literature review - end by 15OCT}
 Research papers to be reviewed include but are not limited to:
 \begin{enumerate}
@@ -412,17 +392,31 @@ Research papers to be reviewed include but are not limited to:
 
 
 \subsection{Base-line survey campaign - end by 20OCT}
-The survey will be Qualtric-based, has around 15 carefully crafted questions, 10 of which will be quiz questions. Survey will be peer-reviewed by security professionals from outside of the team to ensure questions make sense and are accurate. Survey will be distributed to Amazon MTurk platform. 500 entries will be expected.
-\subsection{Analyzing base-line results & Design quizzes - end by 27OCT}
-Survey results will be analyzed and be used to plot the initial perception map. Based on this map and inputs from DA team, the perception map can be upgraded into the cyber threat awareness map. 
+The survey is Qualtric-based, and has around 15 carefully crafted questions collecting basic demographic data, conceptual knowledge, and actual cyber security awareness knowledge about emerging threats. Conceptual knowledge was surveyed in two ways: (i) participants were asked to give three words about the products that can be targeted by hackers, (ii) Participants were given a list of possible entry points (such as email, mobile games, etc) and were asked to give two pairs of entry points. It is important to note that no further details or hints were given and participants make the decisions based on their conscious or unconscious conceptual links between the terms.
+
+Six cyber security awareness questions were given. Each question was based on IBM X-force threat intelligence report, in the form of two images and the participants will be asked to choose the image that they think is malicious (only one among two images is an actual screen shot of the corresponding threat). Up to the moment, there are 129 recorded entries. The actual survey can be accessed online \footnote{$https://ncsu.qualtrics.com/jfe/form/SV_0kapSpiqqgoKPT7$}. At the moment, there are 129 recorded attempts performed by participants from the finance and healthy industries. Preliminary report can also be viewed online \footnote{$https://ql.tc/Nhs8XT$}.
+
+\subsection{Analyzing base-line results & Design quizzes - end by 15NOV}
+Machine learning models (IBM Watson and/or IBM Cognos Analytic) will be used to analyze the collected results and predict the most vulnerable attack vector. Qualtrics API will be used to let IBM machine learning models update the data automatically as entries are being recorded. Machine learning models will analyze the first conceptual set (the three keyword set), then the second conceptual set (the two pair set). Results (expecting a total maximum of four AVs) given by the machine learning models will be checked against the quiz performance (true/false in each of the six cyber security questions).
+
+CSC522 team will perform machine learning tasks on the NVD reports and come up with their own most vulnerable attack vectors. Finally, identified attack vectors from both perspectives will be paired and the system will decide the most vulnerable attack vector that requires immediate actions.
+
 \subsection{Run quiz campaigns - end by 30NOV}
-Light-weight educational quizzes (maximum of 3 questions) will be distributed to the MTurkers who participated in the base-line campaign. 100 entries will be the limit for each round. At least 3 rounds will be executed.
-\subsection{Evaluating, integrating data into perception map - end by 30NOV}
-Statistics gathered from survey rounds will be gradually analyzed, logged and be reflected in the map.
+Light-weight educational quizzes will be distributed to the MTurkers who participated in the base-line campaign. The content of the quizzes will be based on the identified most vulnerable attack vectors (2). The quizzes will utilize adaptive mechanism (conditional branching) provided by the Qualtrics system. 
+
 \subsection{Second base-line survey campaign - end by 05DEC}
-The same survey structure with the same question bank that were used for the initial base-line campaign will then be used again for this phase.  The survey will be made available just for the participants in the initial base-line campaign.
+The same survey structure that were used for the initial base-line campaign will then be used again for this phase and will be made available to both of baseline round 1 participants and new participants. The same category of knowledge (involving the same attack vectors) will be tested. If the training works, baseline round 1 participants will at least do better on questions regarding the attack vector that they were trained on. Comparison metrics include mean score, max score, average time spent on the question, number of clicks while doing the question.
+
 \subsection{Finish research paper - end by 08DEC}
 Final research paper will be finished by 08DEC and be submitted to a suitable conference in January or February of 2019. Due to the multi-disciplinary of the paper, it can be submitted to conferences about either education, Information Technology or Cybersecurity. Raw survey data together with polished reports will also be made available via Github.
+
+\section{Analysis}
+Regarding conceptual knowledge, preliminary results show good signs of the separation between core knowledge and perimeter knowledge. For example, "email", "phone", "computer" emerged to be at the core within the 3 vulnerable product group while "website", "account", "network", etc appeared to be on the perimeter. The distinction is not that clear when it comes to the 2-pair group. Further analysis will be applied for a clearer understanding of this difference. It is also important to note that the purpose and nature of the 3-keyword group and the 2-pair group are a little bit different. The 3-keyword group allows participants complete freedom to state whatever concept they have in mind while the 2-pair group is more structured and controlled.
+
+Regarding cyber security awareness knowledge, recognizing malicious Windows OS file execution attack vector has the highest fail rate (63\%) which appears to be consistent with holes in the conceptual knowledge. Most participants have good (core) knowledge about phone, websites, and some general computer topics but Windows OS and its system prompts. 
+
+\section{Conclusions}
+The project is on time despite slow participation rate in base-line survey campaign of which deadline was pushed back from 20OCT to 30OCT. Instead of concept mapping as originally proposed, machine learning models will be trained and will automatically identify the attack vector(s) that needs attentions. That phase will be finished by 15NOV leaving two weeks for the training quiz campaigns ending in 30NOV (the original deadline). Providing that the machine learning models work, two weeks will be enough to deliver and analyze two rounds of training quizzes and still meet the depth needed considering the limited scope of this paper. K-fold method will be used to check the models' results. 
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
