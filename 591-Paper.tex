@@ -5,49 +5,11 @@
 %% http://www.michaelshell.org/
 %% for current contact information.
 %%
-%% This is a skeleton file demonstrating the use of IEEEtran.cls
-%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
-%% conference paper.
-%%
 %% Support sites:
 %% http://www.michaelshell.org/tex/ieeetran/
 %% http://www.ctan.org/pkg/ieeetran
 %% and
 %% http://www.ieee.org/
-
-%%*************************************************************************
-%% Legal Notice:
-%% This code is offered as-is without any warranty either expressed or
-%% implied; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE! 
-%% User assumes all risk.
-%% In no event shall the IEEE or any contributor to this code be liable for
-%% any damages or losses, including, but not limited to, incidental,
-%% consequential, or any other damages, resulting from the use or misuse
-%% of any information contained here.
-%%
-%% All comments are the opinions of their respective authors and are not
-%% necessarily endorsed by the IEEE.
-%%
-%% This work is distributed under the LaTeX Project Public License (LPPL)
-%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
-%% distributed and modified. A copy of the LPPL, version 1.3, is included
-%% in the base LaTeX documentation of all distributions of LaTeX released
-%% 2003/12/01 or later.
-%% Retain all contribution notices and credits.
-%% ** Modified files should be clearly indicated as such, including  **
-%% ** renaming them and changing author support contact information. **
-%%*************************************************************************
-
-
-% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
-% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
-% *** with production work. The IEEE's font choices and paper sizes can   ***
-% *** trigger bugs that do not appear when using other class files.       ***                          ***
-% The testflow support page is at:
-% http://www.michaelshell.org/tex/testflow/
-
-
 
 \documentclass[conference]{IEEEtran}
 % Some Computer Society conferences also require the compsoc mode option,
@@ -60,66 +22,15 @@
 
 
 
-
-% Some very useful LaTeX packages include:
-% (uncomment the ones you want to load)
-
-
-% *** MISC UTILITY PACKAGES ***
-%
-%\usepackage{ifpdf}
-% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
-% compilation based on whether the output is pdf or dvi.
-% usage:
-% \ifpdf
-%   % pdf code
-% \else
-%   % dvi code
-% \fi
-% The latest version of ifpdf.sty can be obtained from:
-% http://www.ctan.org/pkg/ifpdf
-% Also, note that IEEEtran.cls V1.7 and later provides a builtin
-% \ifCLASSINFOpdf conditional that works the same way.
-% When switching from latex to pdflatex and vice-versa, the compiler may
-% have to be run twice to clear warning/error messages.
-
-
-
-
-
-
-% *** CITATION PACKAGES ***
-%
-%\usepackage{cite}
-% cite.sty was written by Donald Arseneau
-% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
-% \cite{} output to follow that of the IEEE. Loading the cite package will
-% result in citation numbers being automatically sorted and properly
-% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
-% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
-% \cite will automatically add leading space, if needed. Use cite.sty's
-% noadjust option (cite.sty V3.8 and later) if you want to turn this off
-% such as if a citation ever needs to be enclosed in parenthesis.
-% cite.sty is already installed on most LaTeX systems. Be sure and use
-% version 5.0 (2009-03-20) and later if using hyperref.sty.
-% The latest version can be obtained at:
-% http://www.ctan.org/pkg/cite
-% The documentation is contained in the cite.sty file itself.
-
-
-
-
-
-
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
+  \graphicspath{./images/}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 \else
   % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
   % will default to the driver specified in the system graphics.cfg if no
@@ -351,20 +262,22 @@ promptly executed (iii) training results must be able to provide actionable inte
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
-Cyber awareness training (CAT) is challenging because the knowledge domain is defined by both the defenders and the attackers. Most CATs aim at being compliant rather than proactive, and there has been no research on integrating CAT with other components of a defense-in-depth strategy in a corporation. For example, there is no robust mechanism to integrate CAT with Risk management, threat modeling and even with cybersecurity operation centers. Therefore, this paper proposes a new CAT strategy focusing on speed and efficiency.
+The threat landscape is constantly changing. Something that was not considered a vulnerability yesterday may now become one \cite{Manadhata2011AnMetric}. Therefore, cyber-security awareness training (CAT) should be adaptable, be cost effective and most important of all, be integrated well with other components such as enterprise risk management, incident management, threat intelligence and so on. Unfortunately and in most cases, CAT is not a strong component in most cyber defense strategy \cite{Jakoubi2009AManagement}.
 
-InCAT stands for "Intelligence-based Cyber Awareness Training" with the main concept of "training only on the most important emerging cyber security issues based on intelligence and for actionable intelligence." The feedback loop starts with a threat intelligence feed (IBM X-force) where the most recent cyber threats will be analyzed. Associated attack vectors (AVs) will be identified. Recent reports from the National Vulnerability Database (NVD) will be parsed and feed into machine learning models to identify the current severity of each AV. This angle will be called "Technical Severity". Also from the identified AVs, quizzes will be designed and sent to random employees (samples) within a company (population). Other machine learning models will be used to analyze responses, resulting in a list of vulnerabilities for which employees are least prepared. This angle will be called "Human Weakness". The focus of the loop's training effort will be the most urgent issue which will be calculated based on both technical severity and human weakness. Another round of quizzes will be designed on the issue, delivered, and evaluated. At this point, the loop goes back to the beginning.
+This lack of emphasis on human training and analysis leads to greater issues with establishing cyber security requirements, cyber incident's impact determination, and the simulation of possible attack scenarios. For example, security requirements tend to be mechanical 1-on-1 mappings from obvious security features and regulatory controls \cite{Cleland-HuangHowGratae}. Consequently, there is a very common assumption that most malicious hackers will seek the path of the most devastating exploits. In realities, hackers do not follow a straight line while using only a fraction of available vulnerabilities to deliver attacks \cite{Allodi2017TowardsAssumptions}. A lot of those vulnerabilities deal directly with human errors \cite{Messaoud2017AdvancedChallenges}. Also, it is found that when evaluating cybersecurity risks, there are fixation on binary events without consideration of fuzzy states in between, and bias toward the point of view of security management (more technical) rather than overall business goals (more human oriented) \cite{Dhillon2011Developer-drivenTrenches} \cite{Bayuk2013SecurityConstruct}. Last but not least, common reported threat metrics can be highly debatable among teams and agencies \footnote{https://bit.ly/1yJcGjC} since numbers cannot describe all possible underlining context. 
 
-The main research question is about the effectiveness of this new strategy which can be broken down to: (1) Is this strategy accurate? (2) Is this strategy fast? (3) Is this strategy repeatable? In order to provide answers to those three questions, the paper plans to execute the following main mile stones. First, a detailed description of the procedure will be provided with steps, and within each step, there will be sections of precondition, execution, and post-condition. Second, the total time spent on each step such as quiz development time, machine learning model design time, time taken to finish quizzes, etc will be carefully recorded. Third, cross-checking strategies will be employed for both machine learning model quality assurance and quiz results verification. 
+This paper proposes a new model for conducting cyber security training with three long term goals: (i) training efforts are initiated by emerging relevant threats and delivered first to the most vulnerable groups (ii) each training session must be promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc.
 
-The research goals include: (1) Able to use machine learning models to correlate employees' concepts (what they think they know), skills (what they actually know), and threat landscape (NVD reports) to identify which is the most vulnerable attack vector among the emerging attack vectors;  (2) Able to design and deliver quiz-based training materials in a short period of time;  (3) Able to prove the effectiveness of the training materials in improving the awareness relating to the vulnerable attack vector.
+InCAT stands for "Intelligence-based Cyber Awareness Training" and its feedback loop starts with a threat intelligence feed where the most recent cyber threats will be analyzed. Associated attack vectors (AVs) will be identified. Recent reports from the National Vulnerability Database (NVD) will be parsed and feed into machine learning models to identify the current attack-defense themes. This angle is called "Technical Severity". From the identified themes, quizzes will be sent to users (samples) within a company (population). Machine learning models will analyze users' responses, resulting in a list of vulnerabilities for which employees are least prepared. This angle is called "Human Weakness". Actionable intelligence can be then derived from analyzing results gathered from the two angles.
 
-\section{Background}
+Background and related works are presented in Section 2. High-level design structure and elaborations on our methodologies are presented in Section 3. Implementation details including links to demos, source codes, and sample data are presented in Section 4. Section 5 discusses the current results and our self-critical evaluations of this research project to be followed by Section 6 - "Future works".
+
+\section{Background and Related Works}
 Human is the weakest link in any cyber defense strategy. 78\% of cyber incidents were caused by careless humans \cite{20172017Overview}. The process of cyber awareness training is full of challenges. First, the threat landscape is evolving rapidly with both internal factors (technology changes, business flows changed, etc) and external factors (changes in supply chain, compliance, competitors, enemies, political climates, etc) \cite{Ingalsbe2008ThreatEnd, Manadhata2011AnMetric}. To make things worst, there is no agile cooperation between cyber awareness education and other departments. 
 
 Second, knowledge is not always translated into correct actions. For example, people who know the types of phishing are not completely immune from actual phishing. Training materials are more focused on teaching the knowledge rather rather the skills of applying the knowledge. Consequently, tests are developed to test just the knowledge, in which case learners are well aware that they are being tested and consciously put their guards on. It is very hard to simulate real world scenarios.
 
-Finally, it is challenging to prepare people for potential unknown threats that have not happened yet, not mentioning cyber adversaries are incredibly creative, sometimes state sponsored.
+Finally, it is challenging to prepare people for potential unknown threats that have not happened yet, not mentioning cyber adversaries are incredibly creative, sometimes state sponsored. On the quest to find an effective yet affordable solution, the paper found agreements with the below-listed excellent works.
 
 Abawajy \cite{Abawajy2014UserMethods} did a research on user preference of cyber security awareness methods of text-based, video-based and game-based among 60 participants. Even with a "low-tech" appearance, the performance of text-based education is on par with other "fancy" methods. Employees with work deadlines and projects actually prefer light-weight cyber security awareness delivery method that does not get in the way of their main jobs.
 
@@ -372,50 +285,75 @@ Pawlowski \cite{Pawlowski2016SocialDesign} presented a way to use data analytic 
 
 Wei \cite{Wei2017IntegratingAssessment} adopts concept mapping (CM) as a tool to enhance the teaching and evaluating of Information System courses. By analyzing the topology of student CMs, instructors can design CM-based tasks, and grade student CMs against a master CM. While it was not explicitly mentioned in the paper, comparing CM is a very interesting way to identify how the concept map of a student can be changed over time, by education and other factors.
 
+Green \cite{Green2018TowardsSchemes} proposed an alternative to regular text-based machine learning approach with heavier emphasis on argument mining. The process involves steps of careful annotation of a selected corpus, building logic rules or relationships based on domain specific knowledge, and finally, inferring arguments. The paper made a case for more sophisticated content analysis method when dealing with complex contents such as biological research papers.
 
-\section{Methods and Results}
-\subsection{Literature review - end by 15OCT}
-Research papers to be reviewed include but are not limited to:
-\begin{enumerate}
-\item User preference of cyber security awareness delivery methods \cite{Abawajy2014UserMethods}
-\item Social Representations of Cybersecurity by University Students and Implications for Instructional Design \cite{Pawlowski2016SocialDesign}
-\item Integrating Concept Mapping into Information Systems Education for Meaningful Learning and Assessment \cite{Wei2017IntegratingAssessment}
-\item Improving Attention to Security in Software Design with Analytics and Cognitive Techniques \cite{Whitmore2017ImprovingTechniques}\
-\item Security Awareness and Affective Feedback : Categorical Behaviour vs . Reported Behaviour \cite{ShepherdSecurityBehaviour}
-\item Reports Reveal Four Cyber Security Trends-and the Need for Better Cyber Security Training Awareness \cite{Supra2016ReportsAwareness}
-\item PLAYGROUND: preparing students for the cyber battleground \cite{Nielson2017PLAYGROUND:Battleground}
-\item Cybersecurity Education: Bridging the Gap Between Hardware and Software Domains \cite{Lukowiak2014CybersecurityDomains}
-\item Phishing Educational Framework \cite{RakhraAsstPHISHINGKaur}
-\item Challenges and reflections in designing Cyber security curriculum \cite{Pereira2017ChallengesCurriculum}
-\end{enumerate}
+Joshi \cite{JoshiExtractingText} described a strategy of "combining" intelligence gathered from both structured and unstructured texts to form actionable intelligence in the domain of cyber security. The approach relies on a custom ontology for cyber security domain and a "concept extractor" built using various open-source products.
 
+Ferruci \cite{Ferrucci2010BuildingProject} wrote about IBM's billion dollar baby - Watson, and proves that within a large knowledge domain such as Jeopardy's, not only deep learning can understand human languages and response with thoughtful insights, but it can also perform reliably in real time. To sum up the strength and weaknesses of Watson, Deloitte did provide a very good report \cite{Deloitte2015DisruptionWatson} in 2015. At the time of this paper, IBM Watson has been deployed commercially in various domains including health care, finance, insurance and so on.
 
-\subsection{Base-line survey campaign - end by 20OCT}
-The survey is Qualtric-based, and has around 15 carefully crafted questions collecting basic demographic data, conceptual knowledge, and actual cyber security awareness knowledge about emerging threats. Conceptual knowledge was surveyed in two ways: (i) participants were asked to give three words about the products that can be targeted by hackers, (ii) Participants were given a list of possible entry points (such as email, mobile games, etc) and were asked to give two pairs of entry points. It is important to note that no further details or hints were given and participants make the decisions based on their conscious or unconscious conceptual links between the terms.
+\section{Methodology and Designs}
+Inspired greatly by the above-mentioned works, the paper establishes a few guiding principles. First, assessments can be text-based and do not have to be fancy with the uses of videos or simulated software. Second, concept mapping is crucial for situation awareness. Third, advanced and reliable AI has to be used to make sure concepts are harvested fully and correctly. Forth, the whole process has to be fast and scalable. The result is a short and fast feedback loop, which includes 8 main steps as shown in Figure \ref{Figure:IncatDesign}. 
 
-Six cyber security awareness questions were given. Each question was based on IBM X-force threat intelligence report, in the form of two images and the participants will be asked to choose the image that they think is malicious (only one among two images is an actual screen shot of the corresponding threat). Up to the moment, there are 129 recorded entries. The actual survey can be accessed online \footnote{$https://ncsu.qualtrics.com/jfe/form/SV_0kapSpiqqgoKPT7$}. At the moment, there are 129 recorded attempts performed by participants from the finance and healthy industries. Preliminary report can also be viewed online \footnote{$https://ql.tc/Nhs8XT$}.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=8.8cm]{images/INCAT-Designs}
+  \caption{INCAT Design Structure}
+  \label{Figure:IncatDesign}
+\end{figure}
 
-\subsection{Analyzing base-line results \& Design quizzes - end by 15NOV}
-Machine learning models (IBM Watson and/or IBM Cognos Analytic) will be used to analyze the collected results and predict the most vulnerable attack vector. Qualtrics API will be used to let IBM machine learning models update the data automatically as entries are being recorded. Machine learning models will analyze the first conceptual set (the three keyword set), then the second conceptual set (the two pair set). Results (expecting a total maximum of four AVs) given by the machine learning models will be checked against the quiz performance (true/false in each of the six cyber security questions).
+Starting from step one, threat reports are highly condensed data that relates to cyber threat developments and was prepared by domain experts. Reports will be analyzed by the Annotation Model for identification of key entities and the relationships between them. Newly annotated data will be further analyzed by the Knowledge Discovery Model which will automatically identify newly emerged patterns in cyber threat landscape. These results will be consumed by both test/survey system and the control dashboard. In step four, the Test/Survey System will construct assessments based on the knowledge components relating to the newly identified patterns and deliver to the users who are most vulnerable. Assessment results will then be returned to the Test/Survey System for initial processing, resulting in two products: reports with scores and structured text-based feedback strings. Feedback strings will be analyzed by the same Annotation Model and the Knowledge Discovery Model. Derived knowledge from threat reports (step 3) and feedback strings (step 7) are stored in database to be displayed or analyzed at any later time. Through the control dashboard, InCat system administrators may manually correlate details and derive further actionable intelligence.
 
-CSC522 team will perform machine learning tasks on the NVD reports and come up with their own most vulnerable attack vectors. Finally, identified attack vectors from both perspectives will be paired and the system will decide the most vulnerable attack vector that requires immediate actions.
+\subsection{The Type System}
+There are three main steps for building the Annotation Model: (i) Building a system type (ii) Building ground truths by manual annotation (iii) Training and evaluating models.
 
-\subsection{Run quiz campaigns - end by 30NOV}
-Light-weight educational quizzes will be distributed to the MTurkers who participated in the base-line campaign. The content of the quizzes will be based on the identified most vulnerable attack vectors (2). The quizzes will utilize adaptive mechanism (conditional branching) provided by the Qualtrics system. 
+A system type is a domain-specific ontology enriched with relationships. Since the domain is Cyber Security, we decided to rely on another gold standard - the NIST's recommendations for Cyber Vulnerability Description ontology \cite{Booth2016DraftOntology} which was summarized into Figure \ref{Figure:VulOntology}.
 
-\subsection{Second base-line survey campaign - end by 05DEC}
-The same survey structure that were used for the initial base-line campaign will then be used again for this phase and will be made available to both of baseline round 1 participants and new participants. The same category of knowledge (involving the same attack vectors) will be tested. If the training works, baseline round 1 participants will at least do better on questions regarding the attack vector that they were trained on. Comparison metrics include mean score, max score, average time spent on the question, number of clicks while doing the question.
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=16cm]{./images/NISTIR8138}
+  \caption{Vulnerability Description Ontology}
+  \label{Figure:VulOntology}
+\end{figure*}
 
-\subsection{Finish research paper - end by 08DEC}
-Final research paper will be finished by 08DEC and be submitted to a suitable conference in January or February of 2019. Due to the multi-disciplinary of the paper, it can be submitted to conferences about either education, Information Technology or Cybersecurity. Raw survey data together with polished reports will also be made available via Github.
+It is notable that in real-world scenario, reports will only touch a few "boxes" of this crowded ontology. Therefore, the ontology has to be enriched with relationships that are context-preserving. Such relationships can be described directly by rules or indirectly by type \& sub-type specifications. The novelty of our work comes in the form of our own designed relationship rules, the overloading of the rules and the re-mapped hierarchy of the original NIST's ontology. The detailed description file of our type system (ontology with relationships) can be viewed at our Github repository \footnote{https://github.com/genterist/INCAT-public}. Further elaborations on this type system will be on the final full paper.
+
+lorem ipsum
+importance of ontology
+difficulty of relationship design
+inherent relationships in Nist ontology
+the nesting of annotations
+
+\subsection{The Test Design}
+lorem ipsum
+Survey on existing quiz/test designs
+Why incat design is best for its purposes?
+
+\subsection{The AI/Machine learning process}
+lorem ipsum
+the concept of automatic pre-annotation
+details about training sets, test sets, blind sets
+
+\section{Implementation and Results}
+
+\subsection{Annotating Cyber Threat Reports} 
+Categorical data from National Vulnerability Database \footnote{https://nvd.nist.gov/vuln} was used to create a hierarchical cluster that would serve to inform the annotation and classification process used in 4.2 and provide the underlying framework for the identification and selection of Attack Vectors.
+
+Our data sets of descriptions for Threat Reports were extracted from the National Vulnerability Database which can be considered the gold standard of threat reporting and is being used nation wide. In the form of XML or CSV files, datasets can be imported into Annotation Model which is powered by the IBM Watson Knowledge Studio platform \footnote{https://www.ibm.com/watson/services/knowledge-studio/}.
+
+In order to build ground truths, we started first with human annotators and manual annotation. Small sets of 50 entries each are extracted from our corpus of 1000 NVD threat reports in 2018. Sets can be specified to have some overlaps in order to support inter-annotation. Team members (except one) will work on their corresponding pre-assigned sets and manually annotate entities together with relationships. At the final step, the one who did not do any manual annotation will go over the results, resolve conflicts and publish annotated entries as ground truths.
+
+On the IBM Watson Knowledge Studio platform, we train and test our models using the manually annotated entries which are separated into training set (70\%), test set(23\%), and blind set(7\%). Training set is used to teach machine the domain specific knowledge through annotated entities and their relationships. Trained model will then perform on test set to produce test set machine results. Upon comparing test set machine results with human annotated results, the accuracy of the model can be defined. Blind set is used to test the system only after several iterations of training and testing. The end result of this process is an annotation model that can be deployed with other models which, in our case, happened to be IBM Knowledge Discovery.
+
+\subsection{Annotating Feedback Strings}
+The Knowledge Discovery Model is an analytic engine with a front end and a back end. The front end (the Control Dashboard) displays identified patterns, trends and actionable insights using Node.js, React, Semantic UI React, and Chart.js. The back end accepts inputs produced by the annotation model, communicates with IBM Watson Discovery Service API, and renders the views that will be displayed on the front end. The server will also communicate with Qualtrics API in order to initiate the delivery of tests (surveys) to users. The user knowledge testing components will be discussed further in our full paper.
 
 \section{Analysis}
-Regarding conceptual knowledge, preliminary results show good signs of the separation between core knowledge and perimeter knowledge. For example, "email", "phone", "computer" emerged to be at the core within the 3 vulnerable product group while "website", "account", "network", etc appeared to be on the perimeter. The distinction is not that clear when it comes to the 2-pair group. Further analysis will be applied for a clearer understanding of this difference. It is also important to note that the purpose and nature of the 3-keyword group and the 2-pair group are a little bit different. The 3-keyword group allows participants complete freedom to state whatever concept they have in mind while the 2-pair group is more structured and controlled.
+At the moment, we have a corpus of over 8000 cyber vulnerability report for 2018 harvested from the National Vulnerability Database (NVD) and 127 user survey entries gathered from a Qualltric-MechanicalTurk campaign. We established a type system and manually annotated 100 entries of NVD corpus and 27 entries of the user survey corpus. It will be slow in the beginning because members who do not have solid backgrounds in cyber security will need more time to annotate cyber threat reports. We are, however, in the process of making over 20 dictionaries covering main entities in our established type system so that in the next few days, machine can help us annotate the key terms in the reports.
 
-Regarding cyber security awareness knowledge, recognizing malicious Windows OS file execution attack vector has the highest fail rate (63\%) which appears to be consistent with holes in the conceptual knowledge. Most participants have good (core) knowledge about phone, websites, and some general computer topics but Windows OS and its system prompts. 
+A basic dashboard is being built utilizing IBM Watson Knowledge Discovery on top of Watson Knowledge Studio. The near term goals include counting and displaying the counts of relationship types inferred by the AI and ML models. Ultimately, we would like to be able to display inferred statistics from the cyber threat report angle and the user knowledge angle. Please note that these "statistics" are the results of machine models reading and understanding the hidden context behind cyber threat reports and survey takers responses.
 
-\section{Conclusions}
-The project is on time despite slow participation rate in base-line survey campaign of which deadline was pushed back from 20OCT to 30OCT. Instead of concept mapping as originally proposed, machine learning models will be trained and will automatically identify the attack vector(s) that needs attentions. That phase will be finished by 15NOV leaving two weeks for the training quiz campaigns ending in 30NOV (the original deadline). Providing that the machine learning models work, two weeks will be enough to deliver and analyze two rounds of training quizzes and still meet the depth needed considering the limited scope of this paper. K-fold method will be used to check the models' results. 
+\section{Conclusion}
+Our team believes we are on the right schedule to a conference quality paper. We will do further researches to make sure our existing type system is a good one, our human annotated corpus are of high quality with the right quantity, and a good Github repo with carefully documented source codes and data.Due to issues with Overleaf, we had to submit the paper in the state that you have seen. A more detailed, polished version will be readied by appropriate deadline.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -425,7 +363,7 @@ The project is on time despite slow participation rate in base-line survey campa
 % even when the captionsoff option is in effect. However, because
 % of issues like this, it may be the safest practice to put all your
 % \label just after \caption rather than within \caption{}.
-%
+%+
 % Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
 % option should be used if it is desired that the figures are to be
 % displayed while in draft mode.
