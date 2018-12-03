@@ -358,17 +358,63 @@ Accuracy is calculated based on both testing set and blind set. In each round, a
 \section{Implementation and Results}
 The project employs IBM Cloud and IBM Watson system and at this moment, the results include: (a) A good Type System with 12 dictionaries, 38 entity types and 66 relationship types; (b) A good annotated corpus with 100 threat reports (manually annotated), 127 knowledge assessment results (manually annotated), and 8000 threat reports (automatically annotated). All of these results are available for downloading at the project's GitHub repo \footnote{https://github.com/genterist/INCAT-public}.
 
-\subsection{Annotating Cyber Threat Reports} 
-Categorical data from National Vulnerability Database \footnote{https://nvd.nist.gov/vuln} was used to create a hierarchical cluster that would serve to inform the annotation and classification process used in 4.2 and provide the underlying framework for the identification and selection of Attack Vectors.
+\subsection{Designing Cyber Security Knowledge Assessment}
 
-Our data sets of descriptions for Threat Reports were extracted from the National Vulnerability Database which can be considered the gold standard of threat reporting and is being used nation wide. In the form of XML or CSV files, datasets can be imported into Annotation Model which is powered by the IBM Watson Knowledge Studio platform \footnote{https://www.ibm.com/watson/services/knowledge-studio/}.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=8cm]{images/quiz-sample}
+  \caption{Quiz sample}
+  \label{Figure:quiz-sample}
+\end{figure}
+
+lorem ipsum
+
+\begin{table}[]
+\begin{tabular}{|l|c|}
+\hline
+{}&{} \\[-0.5em] 
+{\textbf{TESTED KNOWLEDGE} } & \textbf{FAILED RATE} \\[2pt] \hline
+& \\[-0.8em] 
+Malicious Windows file                          & 63\%                 \\[2pt] \hline
+{}&{} \\[-0.8em] 
+Malicious Android app                           & 34\%                 \\[2pt] \hline
+{}&{} \\[-0.8em] 
+Online MS Office scam                           & 41\%                 \\[2pt] \hline
+{}&{} \\[-0.8em] 
+Fake web pages                                  & 12\%                 \\[2pt] \hline
+{}&{} \\[-0.8em] 
+Effects of ransomwarez                          & 23\%                 \\[2pt] \hline
+{}&{} \\[-0.8em] 
+Desktop MS Office scam                          & 35\%                 \\[2pt] \hline
+\end{tabular}
+\end{table}
+
+\subsection{Annotating Feedback Strings}
+The Knowledge Discovery Model is an analytic engine with a front end and a back end. The front end (the Control Dashboard) displays identified patterns, trends and actionable insights using Node.js, React, Semantic UI React, and Chart.js. The back end accepts inputs produced by the annotation model, communicates with IBM Watson Discovery Service API, and renders the views that will be displayed on the front end. The server will also communicate with Qualtrics API in order to initiate the delivery of tests (surveys) to users. The user knowledge testing components will be discussed further in our full paper.
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=16cm]{./images/feedbackString}
+  \caption{Feedback String Annotation}
+  \label{Figure:feedbackString}
+\end{figure*}
+
+\subsection{Annotating Cyber Threat Reports} 
+Categorical data from National Vulnerability Database \footnote{https://nvd.nist.gov/vuln} was used to create a hierarchical cluster that would serve to inform the annotation and classification process used in 4.2 and provide the underlying framework for the identification and selection of Attack Vectors. The project's data-sets of Threat Reports were extracted from the National Vulnerability Database that is being used nation wide. In the form of XML or CSV files, data-sets can be imported into Annotation Model which is powered by the IBM Watson Knowledge Studio platform \footnote{https://www.ibm.com/watson/services/knowledge-studio/}.
 
 In order to build ground truths, we started first with human annotators and manual annotation. Small sets of 50 entries each are extracted from our corpus of 1000 NVD threat reports in 2018. Sets can be specified to have some overlaps in order to support inter-annotation. Team members (except one) will work on their corresponding pre-assigned sets and manually annotate entities together with relationships. At the final step, the one who did not do any manual annotation will go over the results, resolve conflicts and publish annotated entries as ground truths.
 
 On the IBM Watson Knowledge Studio platform, we train and test our models using the manually annotated entries which are separated into training set (70\%), test set(23\%), and blind set(7\%). Training set is used to teach machine the domain specific knowledge through annotated entities and their relationships. Trained model will then perform on test set to produce test set machine results. Upon comparing test set machine results with human annotated results, the accuracy of the model can be defined. Blind set is used to test the system only after several iterations of training and testing. The end result of this process is an annotation model that can be deployed with other models which, in our case, happened to be IBM Knowledge Discovery.
 
-\subsection{Annotating Feedback Strings}
-The Knowledge Discovery Model is an analytic engine with a front end and a back end. The front end (the Control Dashboard) displays identified patterns, trends and actionable insights using Node.js, React, Semantic UI React, and Chart.js. The back end accepts inputs produced by the annotation model, communicates with IBM Watson Discovery Service API, and renders the views that will be displayed on the front end. The server will also communicate with Qualtrics API in order to initiate the delivery of tests (surveys) to users. The user knowledge testing components will be discussed further in our full paper.
+\subsection{Training Annotation Model}
+lorem ipsum
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=14cm]{./images/trainingResults}
+  \caption{Training results}
+  \label{Figure:trainingResults}
+\end{figure*}
 
 \section{Analysis}
 At the moment, we have a corpus of over 8000 cyber vulnerability report for 2018 harvested from the National Vulnerability Database (NVD) and 127 user survey entries gathered from a Qualltric-MechanicalTurk campaign. We established a type system and manually annotated 100 entries of NVD corpus and 27 entries of the user survey corpus. It will be slow in the beginning because members who do not have solid backgrounds in cyber security will need more time to annotate cyber threat reports. We are, however, in the process of making over 20 dictionaries covering main entities in our established type system so that in the next few days, machine can help us annotate the key terms in the reports.
