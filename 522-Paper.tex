@@ -60,9 +60,39 @@ InCat feedback loop includes 8 main steps as shown in Figure \ref{Figure:IncatDe
 Threat reports are highly condensed data that relates to cyber threat developments and was prepared by domain experts. Reports will be analyzed by the Annotation Model for identification of key entities and the relationships between them. Newly annotated data will be further analyzed by the Knowledge Discovery Model which will automatically identify newly emerged patterns in cyber threat landscape. The Test/Survey System will construct assessments based on the knowledge components relating to the newly identified patterns and deliver to the users who are most vulnerable. Assessment results will then be returned to the Test/Survey System for initial processing, resulting in reports with scores and users' response texts. Such user assessment reports will be analyzed by the same Annotation Model and the Knowledge Discovery Model. Derived knowledge from threat reports (step 3) and user assessment reports (step 7) are stored in database and be displayed by a Control Dashboard system. Through this dashboard, cyber security analysts may correlate details and derive further actionable intelligence.
 
 \section{Implementation}
+\subsection{Data Source and Preprocessing}
+The 2018 vulnerability json file, CVE-2018, was downloaded from https://nvd.nist.gov/vuln/data-feeds.  We choose to work with the more updated
+Base Metrics 3.0 and used a python program to extract records with completed BM3 fields and convert to a csv file.  Two data sets were then created one for text analysis containing the CVE-ID number and description and the second for clustering containing the ID and remaining categorical fields.  Only the fields of Product and Vendor were sometimes missing and these were imputed to the value of "UNKNOWN" in these cases.  Derivative fields such as baseScore and baseSeverity that were simply calculated from other fields were eliminated from cluster processing.
 
-\subsection{Identifying Attack vectors} 
-Categorical data from National Vulnerability Database \footnote{https://nvd.nist.gov/vuln} was used to create a hierarchical cluster that would serve to inform the annotation and classification process used in 4.2 and provide the underlying framework for the identification and selection of Attack Vectors.
+\subsection{Identifying Attack vectors}
+The categorical data set consists of all 6851 available 2018 nvd records with a completed base metric 3 (BM3) section and includes the following features which generally correspond to the vulnerability ontology used in the text analysis (see next section) and based on the NIST17 paper \cite{}: 
+\begin{center}
+\begin{tabular}{ |l|l| } \hline
+Feature & Values\\\hline
+Attack Vector & Network, Adjacent, Local, Physical  \\ 
+Attack Complexity & Low, High  \\ 
+Privileges Required & None, Low, High  \\ 
+User Interaction & None, Required  \\ 
+Confidentiality Impact & High, Low, None\\
+Integrity Impact & High, Low, None\\
+Availability Impact & High, Low, None\\
+\hline
+\end{tabular}
+\end{center}
+
+
+This relatively small set of features and possible values can have 1,296 different combinations.  However, a simple data query reveals that less than 200 combinations contained any threats and 80\% of the vulnerabilities fall into just 16 unique combinations of features. Finding meaningful clusters in the data would help to focus training on the most prevalent threat vectors and make the most efficient use of resources for cyber security training.  
+
+Clustering was used to determine if there was a natural clustering of features and if certain combinations were never seen or exceedingly common. In addition, the features of product and vendor are also available for many records.  Clustering was performed both with and without the additional fields of product and vendor.
+
+Because the data is purely categorical common algorithms such as k-means are not recommended. \cite{}.  DBScan while helpful for removing outliers is not recommended for data with higher dimensions where Euclidean distance is less effective \cite{}.  
+Cluster analysis was performed using python and the k-modes module \cite{https://pypi.org/project/kmodes/} \textit{which defines clusters based on the number of matching categories between data points.}   because this package is readily available and specifically designed to work with categorical data.  
+
+\textit{Describe clusters here.
+}
+The clusters serve to inform the annotation and classification process used in 4.2 and in future could provide the underlying framework for the identification and selection of Attack Vectors on an on-going basis.
+
+
 
 \subsection{Annotation Model for Classifying Text Data}
 Our data sets of descriptions for Threat Reports were extracted from the National Vulnerability Database which can be considered the gold standard of threat reporting and is being used nation wide. In the form of XML or CSV files, datasets can be imported into Annotation Model which is powered by the IBM Watson Knowledge Studio platform \footnote{https://www.ibm.com/watson/services/knowledge-studio/}.
