@@ -242,8 +242,7 @@ tam.nguyen@ncsu.edu - linkedin.com/in/tamcs}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-Cybersecurity training should be adaptable to evolving cyber threat landscape, be cost effective and most important of all, be integrated well with other components such as enterprise risk management, incident management, threat intelligence and so on. Unfortunately, very few cyber security training platforms can satisfy those requirements. This paper proposes a new model for conducting cyber security trainings with three main objectives: (i) training efforts are initiated by emerging relevant threats and delivered first to respective most vulnerable members (ii) each training session must be
-promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc. The model consists of a data-analytic/machine learning (DA) component and a cyber training delivery (DE) component. DE interfaces with users while DA interfaces with existing cyber security systems and/or databases. Together, DE and DA empower each other, forming a feedback loop that allow all previously-stated objectives to be met.
+Cybersecurity training should be adaptable to evolving cyber threat landscape, cost effective and integrated well with other enterprise management components. Unfortunately, very few cyber security training platforms can satisfy such requirements. This paper proposes a new novel model for conducting cyber security trainings with three main objectives: (i) trainings should be initiated by emerging relevant threats and delivered first to the most vulnerable members (ii) the process has to be agile (iii) training results must be able to provide actionable intelligence. For the first time, the paper establishes a type system (ontology and associated relationships) that links the domain of cyber-security awareness training with that of cyber threat intelligence. Powered by IBM Watson platform, the proposed method was found to be practical and scalable. Main contributions such as exports of the type system, the manually annotated corpus of 100 threat reports and 127 cyber-security assessment results, the dictionaries for pre-annotation, etc were made publicly available.
 \end{abstract}
 
 % no keywords
@@ -331,7 +330,7 @@ In short, each section represents associated topics from a certain domain. The U
 \subsection{The Type System}
 There are three main steps for building the Annotation Model: (i) Building a system type (ii) Building ground truths by careful manual annotation (iii) Training and evaluating models.
 
-A system type is a domain-specific ontology enriched with relationships. The ontology serves as the core of a common language describing cyber security vulnerabilities that all models within the InCAT system will use. A well-designed ontology is crucial in finding actionable intelligence across domains, in highly complicated situations such as court cases \cite{Michel2018CyberCybercrime}. However, there are at least two big problems with existing cyber security ontologies: incomplete and incompatible \cite{Mavroeidis2017CyberIntelligence}. We decided to rely on the NIST's recommendations for Cyber Vulnerability Description ontology \cite{Booth2016DraftOntology} which we summarized into Figure \ref{Figure:VulOntology}. While being not perfect, NIST's ontology for Cyber Vulnerability Description appears to be the latest attempt with continuing development efforts sponsored by the US Government.
+A system type is a domain-specific ontology enriched with relationships. The ontology serves as the core of a common language describing cyber security vulnerabilities that all models within the InCAT system will use. A well-designed ontology is crucial in finding actionable intelligence across domains, in highly complicated situations such as court cases \cite{Michel2018CyberCybercrime}. However, there are at least two big problems with existing cyber security ontologies: incomplete and incompatible \cite{Mavroeidis2017CyberIntelligence}. The paper decided to rely on the NIST's recommendations for Cyber Vulnerability Description ontology \cite{Booth2016DraftOntology} which was summarized into Figure \ref{Figure:VulOntology}. While being not perfect, NIST's ontology for Cyber Vulnerability Description appears to be the latest attempt with continuing development efforts sponsored by the US Government.
 
 \begin{figure*}[ht]
   \centering
@@ -359,21 +358,14 @@ Accuracy is calculated based on both testing set and blind set. In each round, a
 The project employs IBM Cloud and IBM Watson system and at this moment, the results include: (a) A good Type System with 12 dictionaries, 38 entity types and 66 relationship types; (b) A good annotated corpus with 100 threat reports (manually annotated), 127 knowledge assessment results (manually annotated), and 8000 threat reports (automatically annotated). All of these results are available for downloading at the project's GitHub repo \footnote{https://github.com/genterist/INCAT-public}.
 
 \subsection{Designing Cyber Security Knowledge Assessment}
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=8cm]{images/quiz-sample}
-  \caption{Quiz sample}
-  \label{Figure:quiz-sample}
-\end{figure}
-
-lorem ipsum
+The assessment was designed based on Qualtrics platform, received 130 verified, paid responses via Amazon Mechanical Turk platform, and includes three sections. The first section asks about demographic questions. The second section asks two questions involving participants' conceptual knowledge about attack vectors. The first one is "Please give us the naems of three products that you think ca be targetted by hackers. The products can be software or hardware." The second one is "From the list of attack vectors below, please give us two different pairs. On attack vector can appear in more than one pair and you don't have to explain the reasons..." Further details can be found on the live survey link \footnote{https://bit.ly/2Q69hJQ}.
 
 \begin{table}[]
+\begin{center}
 \begin{tabular}{|l|c|}
 \hline
 {}&{} \\[-0.5em] 
-{\textbf{TESTED KNOWLEDGE} } & \textbf{FAILED RATE} \\[2pt] \hline
+{\textbf{TESTED KNOWLEDGE} } & \textbf{FAIL RATE} \\[2pt] \hline
 & \\[-0.8em] 
 Malicious Windows file                          & 63\%                 \\[2pt] \hline
 {}&{} \\[-0.8em] 
@@ -387,10 +379,23 @@ Effects of ransomwarez                          & 23\%                 \\[2pt] \
 {}&{} \\[-0.8em] 
 Desktop MS Office scam                          & 35\%                 \\[2pt] \hline
 \end{tabular}
+\end{center}
+ \\
+\caption{Cybersecurity knowledge - Fail rates}
+\label{Table:FailRate}
 \end{table}
+It is important to note that in the first conceptual question, participants have complete freedom in putting down their answers. In the second conceptual question, participants were guided a little bit by a list of attack vectors' names with a brief description for each. Word-cloud analysis shown a strong theme of "email" and "phone" across all three options in the first question and such theme is very consistent among all responses. On the contrary, word-cloud analysis shown more dispersed, more neutral theme in the answers of conceptual question two. More details about the assessment's preliminary results can be found online\footnote{https://ql.tc/Nhs8XT}.
 
-\subsection{Annotating Feedback Strings}
-The Knowledge Discovery Model is an analytic engine with a front end and a back end. The front end (the Control Dashboard) displays identified patterns, trends and actionable insights using Node.js, React, Semantic UI React, and Chart.js. The back end accepts inputs produced by the annotation model, communicates with IBM Watson Discovery Service API, and renders the views that will be displayed on the front end. The server will also communicate with Qualtrics API in order to initiate the delivery of tests (surveys) to users. The user knowledge testing components will be discussed further in our full paper.
+The third section consists of 6 questions about 6 different types of exploits. Fail rates are shown in Table \ref{Table:FailRate}. Figure \ref{Figure:quiz-sample} shows the content of the question with the highest fail rate (63\%).
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=7.7cm]{images/quiz-sample}
+  \caption{Quiz sample}
+  \label{Figure:quiz-sample}
+\end{figure}
+
+While there are only two options for answering the question which means users have 50\% of being correct, in this case, we are still able to identify the knowledge gap. By using actual screenshots of live environments, we are able to simulate the crucial moment where key decision is going to be made. The graphical interface also provides realistic amount of distractions needed. At the moment, there is no question bank for the assessment. This limitation will be discussed further in the analysis section. However, assessment questions like this are easy to make because important screenshots of exploits are usually included in threat reports and normal screenshots can always be taken from a normal live system.
 
 \begin{figure*}[ht]
   \centering
@@ -399,15 +404,15 @@ The Knowledge Discovery Model is an analytic engine with a front end and a back 
   \label{Figure:feedbackString}
 \end{figure*}
 
+\subsection{Annotating Feedback Strings}
+The feedback string for a failed answer to the question in Figure \ref{Figure:quiz-sample} is "Failed: Windows, Mal App, Local". "Windows" indicates the host operating system that the exploit is happening. "Mal App" stands for "malicious app" which is a form of social engineering. "Local" indicates the exploit happen locally on a local computer. The rules to "map" users' answers to feedback strings can be decided and programmed by the assessment designers. Figure \ref{Figure:feedbackString} shows an actual entry of feedback string annotation, in which entities are highlighted with different colors and relationships are indicated by arrows. We also see that several strings can be concatenated to form bigger pictures.
+
+At the bottom left of Figure \ref{Figure:feedbackString}, we see the feedback string that we have been discussing. "Windows" was actually labeled as both "Host OS" and "Product". In the "Host OS" role, "Windows" has a relationship with "Failed" which is labeled as "Scenario". Going back to our ontology, the "Scenario" type is high up the chain with many other types points to it. Therefore, in annotation, it has many relationships with other entities. We also note that this "Failed" scenario has another label named "Test Knowledge" and there is a relationship coming from that "Test Knowledge" to "Computer". "Computer" was labeled as "Conceptual knowlege" and "Theater Local". The whole chain that we mentioned can be translated as followed. "There is a failed test knowledge scenario that involves Windows as the host OS, and local social engineering method of using malicious app. This scenario shows certain knowledge gap regarding computer use."
+
+Obviously, machine learning models will not be able to understand the context as it has just been described. However, certain relationships can only happen among certain types and with enough examples, a machine can learn and be able to mark future entities and their associated relationships. Human annotation is therefore a crucial part in the performance of the resulting model. Unfortunately, it is a time consuming and tiring process which will be discussed further in the Analysis section.
+
 \subsection{Annotating Cyber Threat Reports} 
-Categorical data from National Vulnerability Database \footnote{https://nvd.nist.gov/vuln} was used to create a hierarchical cluster that would serve to inform the annotation and classification process used in 4.2 and provide the underlying framework for the identification and selection of Attack Vectors. The project's data-sets of Threat Reports were extracted from the National Vulnerability Database that is being used nation wide. In the form of XML or CSV files, data-sets can be imported into Annotation Model which is powered by the IBM Watson Knowledge Studio platform \footnote{https://www.ibm.com/watson/services/knowledge-studio/}.
-
-In order to build ground truths, we started first with human annotators and manual annotation. Small sets of 50 entries each are extracted from our corpus of 1000 NVD threat reports in 2018. Sets can be specified to have some overlaps in order to support inter-annotation. Team members (except one) will work on their corresponding pre-assigned sets and manually annotate entities together with relationships. At the final step, the one who did not do any manual annotation will go over the results, resolve conflicts and publish annotated entries as ground truths.
-
-On the IBM Watson Knowledge Studio platform, we train and test our models using the manually annotated entries which are separated into training set (70\%), test set(23\%), and blind set(7\%). Training set is used to teach machine the domain specific knowledge through annotated entities and their relationships. Trained model will then perform on test set to produce test set machine results. Upon comparing test set machine results with human annotated results, the accuracy of the model can be defined. Blind set is used to test the system only after several iterations of training and testing. The end result of this process is an annotation model that can be deployed with other models which, in our case, happened to be IBM Knowledge Discovery.
-
-\subsection{Training Annotation Model}
-lorem ipsum
+The project's data-sets of Threat Reports were extracted from the National Vulnerability Database \footnote{https://nvd.nist.gov/vuln} which is being used by corporations nation wide. In the form of XML or CSV files, data-sets can be imported into Annotation Model ran on the IBM Watson Knowledge Studio platform \footnote{https://www.ibm.com/watson/services/knowledge-studio/}. These data-sets cover a much wider range of topics than the knowledge assessment data-sets. A collection of 12 dictionaries were built for the automatic pre-annotation of 12 key entities. Each dictionary is a CSV file downloadable from the project's GitHub repository.
 
 \begin{figure*}[ht]
   \centering
@@ -416,16 +421,54 @@ lorem ipsum
   \label{Figure:trainingResults}
 \end{figure*}
 
-\section{Analysis}
-At the moment, we have a corpus of over 8000 cyber vulnerability report for 2018 harvested from the National Vulnerability Database (NVD) and 127 user survey entries gathered from a Qualltric-MechanicalTurk campaign. We established a type system and manually annotated 100 entries of NVD corpus and 27 entries of the user survey corpus. It will be slow in the beginning because members who do not have solid backgrounds in cyber security will need more time to annotate cyber threat reports. We are, however, in the process of making over 20 dictionaries covering main entities in our established type system so that in the next few days, machine can help us annotate the key terms in the reports.
+Manual annotation of the cyber threat reports was performed in the same manner as that of the feedback string. However, due to the separation of contents into paragraphs, annotating threat reports carries an extra dimension of "co-reference". Equivalent key terms in different paragraphs will be linked by co-reference in order for relationships and contexts from one paragraph to "flow"  to another.
 
-A basic dashboard is being built utilizing IBM Watson Knowledge Discovery on top of Watson Knowledge Studio. The near term goals include counting and displaying the counts of relationship types inferred by the AI and ML models. Ultimately, we would like to be able to display inferred statistics from the cyber threat report angle and the user knowledge angle. Please note that these "statistics" are the results of machine models reading and understanding the hidden context behind cyber threat reports and survey takers responses.
+\subsection{Training Annotation Model}
+In order to build ground truths, it started first with pre-annotation and then manual annotation. With threat reports, small sets of 50 entries each are extracted from a corpus of 8000 NVD threat reports in 2018. Sets can be specified to have some overlaps in order to support inter-annotation. With user knowledge assessment, 127 entries were put in one set. On the IBM Watson Knowledge Studio platform, the annotation model was trained using the manually annotated entries as ground truths which are separated into training set (80\%), test set(15\%), and blind set(5\%).
+
+Figure \ref{Figure:trainingResults} shows the IBM Watson Knowledge Studio interface with annotation training results using 127 entries of user cybersecurity knowledge assessment result. At the moment, the project has a corpus of over 8000 cyber vulnerability reports for 2018 harvested from the National Vulnerability Database (NVD) and 127 user survey entries gathered from a Qualltric-MechanicalTurk campaign. The project established a type system and manually annotated 100 entries of NVD corpus and 127 entries of the user survey corpus. A basic dashboard is being built utilizing IBM Watson Knowledge Discovery on top of Watson Knowledge Studio. The near term goals include counting and displaying the counts of relationship types inferred by the AI and ML models. Ultimately, it will lead to actionable intelligence inferred from the cyber threat report angle and the user knowledge angle.
+
+\section{Analysis}
+Considering the limited amount of time (4 to 6 weeks, part time), it is obvious that the results are preliminary leaving plenty of rooms for improvements. This section will discuss some important questions regarding the design, methodologies, and results of the project.
+
+\subsection{How accurate will InCAT be?}
+Going back to the proposed type system, there are currently 38 entity types and 66 relationships which cover a wide range of situations. Also, natural language inherently has ambiguities that cause serious conflicts with the precise nature of describing cyber security scenarios. For example, "Windows" may mean "Operating system", or "Desktop". Therefore, even when the training sets were well annotated, the model will have issues with learning certain relationships due to the lack of samples describing that particular relationship and/or the involved entities are difficult to be recognized. That is why the model's accuracy went down (Figure \ref{Figure:trainingResults} when more annotated content about new scenarios were added, diluting or even confusing prior knowledge about known scenario. This means training should be done in a rolling basis, starting with a cluster of entries that share similar entities and relationships. For example, a model can be trained to recognize situations involving malicious mobile phone apps first, prior to training to recognize malicious MS Word situations.
+
+With proper size for ground truths, a model can be accurate up to 90\% or more. After all, IBM Watson is a commercial product with verified natural language processing capabilities. However, it is important to note that machine learning models learn from what was shown and cannot learn from the details that they have not yet seen. The accuracy also depends on the type system being used. While NIST has excellent credibility, their ontology is still being developed. There are also some tweaking in order to make it fit for deployment with IBM Watson platform.
+
+The current Feedback String structure is experimental. It turns out that cramping many brief terms into a long string causes confusions to the model. In the near future, feedback string format can be turned into feedback json documents. The IBM Watson Knowledge Discovery module can then use the annotation model to analyze the content contextually while parsing the same entries as json entries. This will allow the combination of natural language processing power and regular statistic capabilities.
+
+\subsection{How scalable can it be? - Watson v.s Prolog}
+There are generally two approaches for this kind of tasks: using machine learning (such as IBM Watson) or using logic programming (Prolog). In either case, data can be pre-annotated using dictionaries. Relationship documentation is the heaviest task in the data preparation phase. IBM Watson provides a convenient GUI, point-and-click interface for annotating relationships, while Prolog requires coding of relationships. With Prolog, a domain expert has to know both the domain knowledge and Prolog programming skills. In that sense, IBM Watson is more scalable than Prolog.
+
+With IBM Watson, the corpus has to be large enough (thousands of entries) in order for the model to learn relationships accurately. With Prolog, logics that are known can be programmed by the domain experts without relying too much on training data, which appears to be faster and more accurate than Watson. However, Prolog cannot infer logics that are not built on the existing logics stored in its knowledge base (closed world). Machine learning models like Watson, on the other hand, was designed to spot new patterns that even human experts are not aware of as long as there are enough annotated data-sets.
+
+Providing there are a good type system and a large-enough annotated corpus, machine learning-based system can be highly scalable and be tailored to different inter-domain needs among cyber awareness training and other cyber security related domains. The methodology as mentioned in earlier sections allow the use of the annotation model for pre-annotating new training sets that later be manually checked by humans and then used for "upgrading" the annotation model. Moreover, the corpus can be open-sourced for continuous development by volunteers. There is also a possibility of integrating rule-based logic into the model for faster and more efficient training. For those reasons, the paper believes that the InCAT system built on IBM Watson can be highly scalable.
+
+\subsection{How fast can it be?}
+
+From several key angles, the speed of InCAT is acceptable and can always be easily optimized.
+
+In term of deployment speed with a pre-made model, commercial deployment on IBM Watson Knowledge Discovery (WKD) can be set up within minutes. Designing Qualtrics-based tests may cost 60 minutes for a 6 to 10 question quiz, using the proposed 2-picture format (figure \ref{Figure:quiz-sample}. Test results can be exported to disk and be analyzed by. Server side scripts leveraging Qualtrics API can be used to send out surveys to targeted audience. Test results can be processed in near real-time and displayed instantly in business intelligence dashboards such as IBM Cognos, Tableau, etc.
+
+In term of development speed, intermediate learning curve will largely involve learning the IBM Watson natural language-based queries in order to build custom contextual queries in WKD. If a company needs to extend the annotation model, its development team will have to go through the same training cycle and it will take time, depending on what kind of knowledge they want the model to learn. Since knowledge is "transferable", the development team can use existing model to perform the pre-annotation task, tremendously save time.
+
+In term of model training and evaluation time, with a lite plan, a training set of 100 entries, and a test set of 20 entries, it takes IBM Watson 8 to 10 minutes to learn. With commercial cloud access, the speed can be much faster. There are also options to take snapshots of trained models and restore accordingly.
+
+\subsection{How will this solution make cyber-security awareness training more adaptable?}
+This project is the first to propose an type system that connects the domain of cyber awareness training/assessment with the domain of cyber intelligence. We should note that the NIST's ontology for describing cyber vulnerabilities is so new that it is still being developed. In operational settings, the type system together with the annotation model allow automatic censoring of cyber landscape changes and automatic initialization of knowledge assessment requests (figure \ref{Figure:IncatDesign}.
+
+InCAT is more adaptable to threat landscape changes than to users' knowledge. This is a crucial difference in the educational purpose of InCAT in comparison with other traditional cyber security awareness trainings. InCAT realizes that training people to be cyber security experts is an impossible task especially when their main job is not about cyber security.
+
+Additionally, by integrating well with other related domains, cyber awareness training can provide more frequent actionable intelligence resulting in more recognizable impacts. Consequently, the role of cyber awareness training will be improved with more attentions, funding, and allocated resource. More received investments definitely lead to more capabilities, including more robust adaptation.
 
 \section{Conclusion}
 
-InCAT - a new model for conducting cyber security training with three long term goals: (i) training efforts are initiated by emerging relevant threats and delivered first to the most vulnerable groups (ii) each training session must be promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc.
+InCAT is a new model for conducting cyber security training with three long term goals: (i) training efforts are initiated by emerging relevant threats and delivered first to the most vulnerable groups (ii) each training session must be promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc.
 
-Our team believes we are on the right schedule to a conference quality paper. We will do further researches to make sure our existing type system is a good one, our human annotated corpus are of high quality with the right quantity, and a good Github repo with carefully documented source codes and data.Due to issues with Overleaf, we had to submit the paper in the state that you have seen. A more detailed, polished version will be readied by appropriate deadline.
+The project is the first in making an attempt at constructing a type system that allows the inter-connecting of intelligence among cyber-security related domains, including cyber-security awareness training. The project is also the first in designing an intelligence-driven rather than compliance-driven or knowledge-driven process for conducting cyber-security awareness training. Within a very short amount of time, the project was able to provide preliminary results including a manually annotated corpus of 100 threat reports, and 127 cyber-security awareness training assessments; a set of dictionaries for pre-annotation; and an annotation model capable of 66\% entity marking coverage with 75\% accuracy.
+
+Basic research questions were answered and directions for future developments are clear: (1) Deeper research into inter-domain ontology design and upgrade the type system, (2) Significantly extend the words in dictionaries for more comprehensive pre-annotation (3) Integrate Prolog into work flow, allowing it to work in parallel with the machine learning model (4) Extend the corpus with more human annotated contents.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.

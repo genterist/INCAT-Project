@@ -18,21 +18,19 @@ North Carolina State University\\
 \maketitle
 
 \begin{abstract}
-  The abstract paragraph should be indented  on both the left- and right-hand margins. Use 10~point
-  type, with a vertical spacing (leading) of 11~points.  The word
-  \textbf{Abstract} must be centered, bold, and in point size 12. Two
-  line spaces precede the abstract. The abstract must be limited to
-  one paragraph.
+  Cybersecurity training should be adaptable to evolving cyber threat landscape, cost effective and integrated well with other enterprise management components. Unfortunately, very few cyber security training platforms can satisfy such requirements. This paper proposes a new novel model for conducting cyber security trainings with three main objectives: (i) trainings should be initiated by emerging relevant threats and delivered first to the most vulnerable members (ii) the process has to be agile (iii) training results must be able to provide actionable intelligence. For the first time, the paper establishes a type system (ontology and associated relationships) that links the domain of cyber-security awareness training with that of cyber threat intelligence. Powered by IBM Watson platform, the proposed method was found to be practical and scalable. Main contributions such as exports of the type system, the manually annotated corpus of 100 threat reports and 127 cyber-security assessment results, the dictionaries for pre-annotation, etc were made publicly available.
 \end{abstract}
 
 \section{Introduction}
-Cyber security training should be adaptable to evolving cyber threat landscape, be cost effective and most important of all, be integrated well with other components such as enterprise risk management, incident management, threat intelligence and so on. Unfortunately, very few cyber security training platforms can satisfy those requirements.
+The threat landscape is constantly changing. Something that was not considered a vulnerability yesterday may now become one \cite{Manadhata2011AnMetric}. Therefore, cyber-security awareness training (CAT) should be adaptable, be cost effective and most important of all, be integrated well with other components such as enterprise risk management, incident management, threat intelligence and so on. Unfortunately and in most cases, CAT is not a strong component in most cyber defense strategy \cite{Jakoubi2009AManagement}.
 
-This paper proposes a new model for conducting cyber security training with three main objectives: (i) training efforts are initiated by emerging relevant threats and delivered first to the most vulnerable groups (ii) each training session must be promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc.
+This lack of emphasis on human training and analysis leads to greater issues with establishing cyber security requirements, cyber incident's impact determination, and the simulation of possible attack scenarios. For example, security requirements tend to be mechanical 1-on-1 mappings from obvious security features and regulatory controls \cite{Cleland-Huang2014HowGratae}. Consequently, there is a very common assumption that most malicious hackers will seek the path of the most devastating exploits. In realities, hackers do not follow a straight line while using only a fraction of available vulnerabilities to deliver attacks \cite{Allodi2017TowardsAssumptions}. A lot of those vulnerabilities deal directly with human errors \cite{Messaoud2017AdvancedChallenges}.
 
-InCAT stands for "Intelligence-based Cyber Awareness Training" and its feedback loop starts with a threat intelligence feed where the most recent cyber threats will be analyzed. Associated attack vectors (AVs) will be identified. Recent reports from the National Vulnerability Database (NVD) will be parsed and feed into machine learning models to identify the current themes. This angle is called "Technical Severity". From the identified themes, quizzes will be sent to users (samples) within a company (population). Machine learning models will analyze users responses, resulting in a list of vulnerabilities for which employees are least prepared. This angle is called "Human Weakness". Actionable intelligence can be derived from analyzing results gathered from the two angles.
+Also, it is found that when evaluating cybersecurity risks, there are fixation on binary events without consideration of fuzzy states in between, and bias toward the point of view of security management (more technical) rather than overall business goals (more human oriented) \cite{Dhillon2011Developer-drivenTrenches} \cite{Bayuk2013SecurityConstruct}. Last but not least, common reported threat metrics can be highly debatable among teams and agencies \footnote{https://bit.ly/1yJcGjC} since numbers cannot describe all possible underlining context. 
 
-Pedagogical backgrounds are presented in Section 2. High-level design structure and elaborations on our methodologies are presented in Section 3. Implementation details including links to demos, source codes, and sample data are presented in Section 4. Section 5 discusses the current results and our self-critical evaluations of this research project to be followed by Section 6 - "Future works".
+This paper proposes InCAT - a new model for conducting cyber security training with a strong focus on drilling deep into the shared contexts among collected cyber awareness training results, cyber threat intelligence reports, and other cyber security related data logs. InCAT stands for "Intelligence-based Cyber Awareness Training" and its feedback loop starts with a threat intelligence feed where the most recent cyber threats will be analyzed by machine learning models to identify the current attack-defense themes. This angle is called "Technical Angle". From the identified themes, quizzes will be sent to users (samples) within a company (population). Machine learning models will analyze users' responses with expected results such as a list of vulnerabilities for which employees are least prepared for. This angle is called "Human Angle". Actionable intelligence can then be derived from analyzing results gathered from both angles.
+
+The main contributions of this paper include: (i) A novel new model for conducting cyber-security awareness training that is highly adaptive to threat landscape (ii) Downloadable type system, dictionaries and human annotated data-sets for further customization and studies, (iii) Exported machine learning models and starter code base for immediate deployment. Background and related works are presented in Section 2. High-level design structure and elaborations on our methodologies are presented in Section 3. Implementation details including links to demos, source codes, sample data and results are presented in Section 4. Self-critical evaluations of this research project will be presented in Section 5 to be followed with plans for future works listed in the Conclusion section.
 
 \section{Backgrounds}
 Human is the weakest link in any cyber defense strategy. 78\% of cyber incidents were caused by careless humans \cite{20172017Overview}. The process of cyber awareness training is full of challenges. First, the threat landscape is evolving rapidly with both internal factors (technology changes, business flows changed, etc) and external factors (changes in supply chain, compliance, competitors, enemies, political climates, etc) \cite{Ingalsbe2008ThreatEnd, Manadhata2011AnMetric}. To make things worst, there is no agile cooperation between cyber awareness education and other departments. 
@@ -46,6 +44,12 @@ Abawajy \cite{Abawajy2014UserMethods} did a research on user preference of cyber
 Pawlowski \cite{Pawlowski2016SocialDesign} presented a way to map learners' perceptions toward cyber security topics using data analytics.  Especially of interest for high-impact cyber security training is finding out which topics are either high-interest (may affect individuals personally) or low-awareness (security blind spots) for learners.  Additionally, from a management perspective, how learners can be motivated to continue to learn and stay abreast of new threats is also of high importance.  It was discovered that learners have been exposed to several cyber security key terms and concepts, care very much about cyber security topics that may affect them personally, but that they lack awareness of the bigger picture which also includes national cyber infrastructure and cyber terrorism.
 
 Wei \cite{Wei2017IntegratingAssessment} adopts concept mapping (CM) as a tool to enhance the teaching and evaluating of Information System courses. By analyzing the topology of student CMs, instructors can design CM-based tasks, and grade student CMs against a master CM. While it was not explicitly mentioned in the paper, comparing CM is a very interesting way to identify how the concept map of a student can be changed over time, by education and other factors.
+
+Green \cite{Green2018TowardsSchemes} proposed an alternative to regular text-based machine learning approach with heavier emphasis on argument mining. The process involves steps of careful annotation of a selected corpus, building logic rules or relationships based on domain specific knowledge, and finally, inferring arguments. The paper made a case for more sophisticated content analysis method when dealing with complex contents such as biological research papers.
+
+Joshi \cite{Joshi2013ExtractingText} described a strategy of "combining" intelligence gathered from both structured and unstructured texts to form actionable intelligence in the domain of cyber security. The approach relies on a custom ontology for cyber security domain and a "concept extractor" built using various open-source products.
+
+Ferruci \cite{Ferrucci2010BuildingProject} wrote about IBM's billion dollar baby - Watson, and proves that within a large knowledge domain such as Jeopardy's, not only deep learning can understand human languages and response with thoughtful insights, but it can also perform reliably in real time. To sum up the strength and weaknesses of Watson, Deloitte did provide a very good report \cite{DeloitteDevelopment2015DisruptionWatson} in 2015. At the time of this paper, IBM Watson has been deployed commercially in various domains including health care, finance, insurance and so on.
 
 \section{Methodology and Designs}
 InCat feedback loop includes 8 main steps as shown in Figure \ref{Figure:IncatDesign}. 
@@ -61,11 +65,9 @@ Threat reports are highly condensed data that relates to cyber threat developmen
 
 \section{Implementation}
 \subsection{Data Source and Preprocessing}
-The 2018 vulnerability json file, CVE-2018, was downloaded from https://nvd.nist.gov/vuln/data-feeds.  We choose to work with the more updated
-Base Metrics 3.0 and used a python program to extract records with completed BM3 fields and convert to a csv file.  Two data sets were then created one for text analysis containing the CVE-ID number and description and the second for clustering containing the ID and remaining categorical fields.  Only the fields of Product and Vendor were sometimes missing and these were imputed to the value of "UNKNOWN" in these cases.  Derivative fields such as baseScore and baseSeverity that were simply calculated from other fields were eliminated from cluster processing.
+The nvd database was already a high quality data set so minimal manipulation of the data was needed for pre-processing. From the 2018 vulnerability json file, CVE-2018, downloaded from https://nvd.nist.gov/vuln/data-feeds on September 19th (The file is continually updated).  We then created two data sets.  For text analysis we extracted the CVE-ID number and description for 8748 records.  The categorical data set consists of all 6851 available 2018 nvd records with a completed base metric 3 (BM3) section.  These features generally correspond to the vulnerability ontology used in the text analysis (see next section) which is based on the NIST17 paper \cite{}: For clustering we extracted the CVE-ID and categorical fields (listed in the table below along with their possible values).  Derivative fields such as baseScore and baseSeverity that are calculated from other fields were eliminated from cluster processing.  We choose to work with the more updated Base Metrics 3.0.   Only the fields of Product and Vendor were sometimes missing and these were imputed to the value of "UNKNOWN" in these cases.  
 
 \subsection{Identifying Attack vectors}
-The categorical data set consists of all 6851 available 2018 nvd records with a completed base metric 3 (BM3) section and includes the following features which generally correspond to the vulnerability ontology used in the text analysis (see next section) and based on the NIST17 paper \cite{}: 
 \begin{center}
 \begin{tabular}{ |l|l| } \hline
 Feature & Values\\\hline
@@ -81,7 +83,7 @@ Availability Impact & High, Low, None\\
 \end{center}
 
 
-This relatively small set of features and possible values can have 1,296 different combinations.  However, a simple data query reveals that less than 200 combinations contained any threats and 80\% of the vulnerabilities fall into just 16 unique combinations of features. Finding meaningful clusters in the data would help to focus training on the most prevalent threat vectors and make the most efficient use of resources for cyber security training.  
+This relatively small set of features and possible values can have 1,296 different combinations.  However, a simple data query reveals that only 236 combinations were associated with any threats and 74.7\% of the vulnerabilities fall into just 16 unique combinations of features. Finding meaningful clusters in the data would help to focus training on the most prevalent threat vectors and make the most efficient use of resources.  
 
 Clustering was used to determine if there was a natural clustering of features and if certain combinations were never seen or exceedingly common. In addition, the features of product and vendor are also available for many records.  Clustering was performed both with and without the additional fields of product and vendor.
 
@@ -90,7 +92,7 @@ Cluster analysis was performed using python and the k-modes module \cite{https:/
 
 \textit{Describe clusters here.
 }
-The clusters serve to inform the annotation and classification process used in 4.2 and in future could provide the underlying framework for the identification and selection of Attack Vectors on an on-going basis.
+The clustering results serve to inform the annotation and classification process used in 4.2 and in future could provide the underlying framework for the identification and selection of Attack Vectors on an on-going basis.
 
 
 
@@ -114,19 +116,15 @@ In order to build ground truths, we started first with human annotators and manu
 
 On the IBM Watson Knowledge Studio platform, we train and test our models using the manually annotated entries which are separated into training set (70\%), test set(23\%), and blind set(7\%). Training set is used to teach machine the domain specific knowledge through annotated entities and their relationships. Trained model will then perform on test set to produce test set machine results. Upon comparing test set machine results with human annotated results, the accuracy of the model can be defined. Blind set is used to test the system only after several iterations of training and testing. The end result of this process is an annotation model that can be deployed with other models which, in our case, happened to be IBM Knowledge Discovery.
 
-\subsection{Analyzing Users Responses}
-The Knowledge Discovery Model is an analytic engine with a front end and a back end. The front end (the Control Dashboard) displays identified patterns, trends and actionable insights using Node.js, React, Semantic UI React, and Chart.js. The back end accepts inputs produced by the annotation model, communicates with IBM Watson Discovery Service API, and renders the views that will be displayed on the front end. The server will also communicate with Qualtrics API in order to initiate the delivery of tests (surveys) to users. The user knowledge testing components will be discussed further in our full paper.
-
-\section{Current Results and Future Works}
-At the moment, we have a corpus of over 8000 cyber vulnerability report for 2018 harvested from the National Vulnerability Database (NVD) and 127 user survey entries gathered from a Qualltric-MechanicalTurk campaign. We established a type system and manually annotated 100 entries of NVD corpus and 27 entries of the user survey corpus. It will be slow in the beginning because members who do not have solid backgrounds in cyber security will need more time to annotate cyber threat reports. We are, however, in the process of making over 20 dictionaries covering main entities in our established type system so that in the next few days, machine can help us annotate the key terms in the reports.
-
-A basic dashboard is being built utilizing IBM Watson Knowledge Discovery on top of Watson Knowledge Studio. The near term goals include counting and displaying the counts of relationship types inferred by the AI and ML models. Ultimately, we would like to be able to display inferred statistics from the cyber threat report angle and the user knowledge angle. Please note that these "statistics" are the results of machine models reading and understanding the hidden context behind cyber threat reports and survey takers responses.
-
-%\section{Future works}
-%Lorem ipsum
+\subsection{Training and Evaluating the Model}
+put content here
 
 \section{Conclusion}
-Our team believes we are on the right schedule to a conference quality paper. We will do further researches to make sure our existing type system is a good one, our human annotated corpus are of high quality with the right quantity, and a good Github repo with carefully documented source codes and data.Due to issues with Overleaf, we had to submit the paper in the state that you have seen. A more detailed, polished version will be readied by appropriate deadline.
+InCAT is a new model for conducting cyber security training with three long term goals: (i) training efforts are initiated by emerging relevant threats and delivered first to the most vulnerable groups (ii) each training session must be promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc.
+
+The project is the first in making an attempt at constructing a type system that allows the inter-connecting of intelligence among cyber-security related domains, including cyber-security awareness training. The project is also the first in designing an intelligence-driven rather than compliance-driven or knowledge-driven process for conducting cyber-security awareness training. Within a very short amount of time, the project was able to provide preliminary results including a manually annotated corpus of 100 threat reports, and 127 cyber-security awareness training assessments; a set of dictionaries for pre-annotation; and an annotation model capable of 66\% entity marking coverage with 75\% accuracy.
+
+Basic research questions were answered and directions for future developments are clear: (1) Deeper research into inter-domain ontology design and upgrade the type system, (2) Significantly extend the words in dictionaries for more comprehensive pre-annotation (3) Integrate Prolog into work flow, allowing it to work in parallel with the machine learning model (4) Extend the corpus with more human annotated contents.
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,references.bib}
