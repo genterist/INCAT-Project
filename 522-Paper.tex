@@ -65,6 +65,9 @@ Threat reports are highly condensed data that relates to cyber threat developmen
 
 \section{Implementation}
 \subsection{Data Source and Preprocessing}
+
+Number of records for annotations:  8748
+Number of records for clusters:  6851
 The nvd database was already a high quality data set so minimal manipulation of the data was needed for pre-processing. From the 2018 vulnerability json file, CVE-2018, downloaded from https://nvd.nist.gov/vuln/data-feeds on September 19th (The file is continually updated).  We then created two data sets.  For text analysis we extracted the CVE-ID number and description for 8748 records.  The categorical data set consists of all 6851 available 2018 nvd records with a completed base metric 3 (BM3) section.  These features generally correspond to the vulnerability ontology used in the text analysis (see next section) which is based on the NIST17 paper \cite{}: For clustering we extracted the CVE-ID and categorical fields (listed in the table below along with their possible values).  Derivative fields such as baseScore and baseSeverity that are calculated from other fields were eliminated from cluster processing.  We choose to work with the more updated Base Metrics 3.0.   Only the fields of Product and Vendor were sometimes missing and these were imputed to the value of "UNKNOWN" in these cases.  
 
 \subsection{Identifying Attack vectors}
@@ -92,6 +95,41 @@ Cluster analysis was performed using python and the k-modes module \cite{https:/
 
 \textit{Describe clusters here.
 }
+
+\begin{center}
+\begin{tabular}{ |l|l| } \hline
+Feature & Values\\\hline
+Attack Vector & Network, Adjacent, Local, Physical  \\ 
+Attack Complexity & Low, High  \\ 
+Privileges Required & None, Low, High  \\ 
+User Interaction & None, Required  \\ 
+Confidentiality Impact & High, Low, None\\
+Integrity Impact & High, Low, None\\
+Availability Impact & High, Low, None\\
+\hline
+\end{tabular}
+\end{center}
+NETWORK,LOW,NONE,NONE,HIGH,HIGH,HIGH,1090
+NETWORK,LOW,NONE,NONE,NONE,HIGH,NONE,687
+NETWORK,LOW,REQUIRED,NONE,LOW,LOW,NONE,652
+LOCAL,LOW,NONE,LOW,HIGH,HIGH,HIGH,634
+NETWORK,LOW,NONE,NONE,NONE,NONE,HIGH,565
+NETWORK,LOW,REQUIRED,NONE,HIGH,HIGH,HIGH,558
+NETWORK,LOW,NONE,LOW,HIGH,HIGH,HIGH,476
+NETWORK,LOW,NONE,NONE,HIGH,NONE,NONE,455
+LOCAL,LOW,REQUIRED,NONE,NONE,NONE,HIGH,336
+NETWORK,LOW,REQUIRED,LOW,LOW,LOW,NONE,291
+LOCAL,LOW,REQUIRED,NONE,HIGH,HIGH,HIGH,280
+NETWORK,LOW,NONE,LOW,HIGH,NONE,NONE,170
+NETWORK,HIGH,REQUIRED,NONE,HIGH,HIGH,HIGH,161
+NETWORK,LOW,NONE,NONE,LOW,NONE,NONE,153
+NETWORK,LOW,REQUIRED,HIGH,LOW,LOW,NONE,131
+LOCAL,LOW,NONE,LOW,HIGH,NONE,NONE,74
+LOCAL,HIGH,NONE,LOW,HIGH,NONE,NONE,67
+NETWORK,LOW,REQUIRED,NONE,NONE,HIGH,NONE,62
+NETWORK,LOW,REQUIRED,LOW,NONE,HIGH,NONE,5
+NETWORK,HIGH,REQUIRED,NONE,NONE,NONE,HIGH,4
+
 The clustering results serve to inform the annotation and classification process used in 4.2 and in future could provide the underlying framework for the identification and selection of Attack Vectors on an on-going basis.
 
 
