@@ -66,12 +66,25 @@ Threat reports are highly condensed data that relates to cyber threat developmen
 \section{Implementation}
 \subsection{Data Source and Preprocessing}
 
-Number of records for annotations:  8748
-Number of records for clusters:  6851
-The nvd database was already a high quality data set so minimal manipulation of the data was needed for pre-processing. From the 2018 vulnerability json file, CVE-2018, downloaded from https://nvd.nist.gov/vuln/data-feeds on September 19th (The file is continually updated).  We then created two data sets.  For text analysis we extracted the CVE-ID number and description for 8748 records.  The categorical data set consists of all 6851 available 2018 nvd records with a completed base metric 3 (BM3) section.  These features generally correspond to the vulnerability ontology used in the text analysis (see next section) which is based on the NIST17 paper \cite{}: For clustering we extracted the CVE-ID and categorical fields (listed in the table below along with their possible values).  Derivative fields such as baseScore and baseSeverity that are calculated from other fields were eliminated from cluster processing.  We choose to work with the more updated Base Metrics 3.0.   Only the fields of Product and Vendor were sometimes missing and these were imputed to the value of "UNKNOWN" in these cases.  
+\begin{center} 
+\caption{Vulnerability Datasets, Sept 19, 2018} \\
+\begin{tabular}{ c c  } \\ \hline
+ Process & Number of Records \\ \hline
+ Annotations & 8748  \\  \hline
+ Clustering & 6851  \\   \hline
+\end{tabular} \\
+\label{table:1}
+\end{center}
+
+The nvd database (source:  https://nvd.nist.gov/vuln/data-feeds) was already a high quality data set so minimal manipulation of the data was needed for preprocessing. Our source was the 2018 vulnerability .json file, CVE-2018, downloaded on September 19th (The file is continually updated). We then created two data sets one for the text analysis and the second for clustering anaysis.  
+
+For text analysis we extracted the CVE-ID number and Description for 8748 records.  For the categorical data we choose to work with the more updated Base Metrics 3.0 (BM3). The categorical data set used for clustering consists of all 6851 available 2018 nvd records with a completed BM3 section.  This data was not available for every record since it only becomes available after a vulnerability analysis is completed; records without completed BM3 fields were eliminated from clustering analysis.  BM3 features generally correspond to the vulnerability ontology used in the text analysis (see next section) which is based on the NIST's recommendations for Cyber Vulnerability Description ontology \cite{Booth2016DraftOntology}.
+
+To cluster the data we extracted the CVE-ID and categorical fields (listed in the table below along with their possible values).  Derivative fields such as baseScore and baseSeverity that are calculated from other fields and the fields product and vendor were eliminated from cluster processing.    
 
 \subsection{Identifying Attack vectors}
 \begin{center}
+\caption{Categorical Data} \\
 \begin{tabular}{ |l|l| } \hline
 Feature & Values\\\hline
 Attack Vector & Network, Adjacent, Local, Physical  \\ 
@@ -85,54 +98,40 @@ Availability Impact & High, Low, None\\
 \end{tabular}
 \end{center}
 
+This relatively small set of features and possible values can have 1,296 different combinations.  However, a simple data query reveals that only 236 combinations were associated with any threats and 74.7\% of the vulnerabilities fall into just 16 unique combinations of features.  Finding meaningful clusters in the data would help to focus training on the most prevalent threat vectors and make the most efficient use of resources.  
 
-This relatively small set of features and possible values can have 1,296 different combinations.  However, a simple data query reveals that only 236 combinations were associated with any threats and 74.7\% of the vulnerabilities fall into just 16 unique combinations of features. Finding meaningful clusters in the data would help to focus training on the most prevalent threat vectors and make the most efficient use of resources.  
-
-Clustering was used to determine if there was a natural clustering of features and if certain combinations were never seen or exceedingly common. In addition, the features of product and vendor are also available for many records.  Clustering was performed both with and without the additional fields of product and vendor.
-
-Because the data is purely categorical common algorithms such as k-means are not recommended. \cite{}.  DBScan while helpful for removing outliers is not recommended for data with higher dimensions where Euclidean distance is less effective \cite{}.  
-Cluster analysis was performed using python and the k-modes module \cite{https://pypi.org/project/kmodes/} \textit{which defines clusters based on the number of matching categories between data points.}   because this package is readily available and specifically designed to work with categorical data.  
-
-\textit{Describe clusters here.
-}
+Because the data is purely categorical common algorithms such as k-means are not recommended. \cite{}.  DBScan while helpful for removing outliers is not recommended for data with higher dimensions where Euclidean distance is less effective \cite{}.  The KModes module available for python was selected for the clustering implementation \cite{https://pypi.org/project/kmodes/}  because this package is readily available and specifically designed to work with categorical data.
+This algorithm defines clusters based on the number of matching categories between data points and it calculates the cost or dissimilarity of each set of clusters based on the sum of number of fields that are different between each record and its assigned centroid.
 
 \begin{center}
-\begin{tabular}{ |l|l| } \hline
-Feature & Values\\\hline
-Attack Vector & Network, Adjacent, Local, Physical  \\ 
-Attack Complexity & Low, High  \\ 
-Privileges Required & None, Low, High  \\ 
-User Interaction & None, Required  \\ 
-Confidentiality Impact & High, Low, None\\
-Integrity Impact & High, Low, None\\
-Availability Impact & High, Low, None\\
+\caption{Optimal Clusters} \\
+\begin{tabular}{ |l|p{1.1cm}|l|p{1.1cm}|p{1.4cm}|p{1.1cm}|p{1.4cm}|p{1.1cm}| } \hline
+\small{Attack Vector & Complexity & User Interaction & Privileges & Confidentiality Impact & Integrity Impact & Availability Impact & Count} \\ \hline
+NETWORK & LOW & NONE & NONE & HIGH & HIGH & HIGH & 1090 \\
+NETWORK & LOW & NONE & NONE & NONE & HIGH & NONE & 687 \\ 
+NETWORK & LOW & REQUIRED & NONE & LOW & LOW & NONE & 652 \\
+LOCAL & LOW & NONE & LOW & HIGH & HIGH & HIGH & 634 \\
+NETWORK & LOW & NONE & NONE & NONE & NONE & HIGH & 565 \\
+NETWORK & LOW & REQUIRED & NONE & HIGH & HIGH & HIGH & 558 \\
+NETWORK & LOW & NONE & LOW & HIGH & HIGH & HIGH & 476 \\
+NETWORK & LOW & NONE & NONE & HIGH & NONE & NONE & 455 \\
+LOCAL & LOW & REQUIRED & NONE & NONE & NONE & HIGH & 336 \\
+NETWORK & LOW & REQUIRED & LOW & LOW & LOW & NONE & 291 \\
+LOCAL & LOW & REQUIRED & NONE & HIGH & HIGH & HIGH & 280 \\
+NETWORK & LOW & NONE & LOW & HIGH & NONE & NONE & 170 \\
+NETWORK & HIGH & REQUIRED & NONE & HIGH & HIGH & HIGH & 161 \\
+NETWORK & LOW & NONE & NONE & LOW & NONE & NONE & 153 \\
+NETWORK & LOW & REQUIRED & HIGH & LOW & LOW & NONE & 131 \\
+LOCAL & LOW & NONE & LOW & HIGH & NONE & NONE & 74 \\
+LOCAL & HIGH & NONE & LOW & HIGH & NONE & NONE & 67 \\
+NETWORK & LOW & REQUIRED & NONE & NONE & HIGH & NONE & 62  \\
+NETWORK & LOW & REQUIRED & LOW & NONE & HIGH & NONE & 5 \\
+NETWORK & HIGH & REQUIRED & NONE & NONE & NONE & HIGH & 4 \\
 \hline
 \end{tabular}
 \end{center}
-NETWORK,LOW,NONE,NONE,HIGH,HIGH,HIGH,1090
-NETWORK,LOW,NONE,NONE,NONE,HIGH,NONE,687
-NETWORK,LOW,REQUIRED,NONE,LOW,LOW,NONE,652
-LOCAL,LOW,NONE,LOW,HIGH,HIGH,HIGH,634
-NETWORK,LOW,NONE,NONE,NONE,NONE,HIGH,565
-NETWORK,LOW,REQUIRED,NONE,HIGH,HIGH,HIGH,558
-NETWORK,LOW,NONE,LOW,HIGH,HIGH,HIGH,476
-NETWORK,LOW,NONE,NONE,HIGH,NONE,NONE,455
-LOCAL,LOW,REQUIRED,NONE,NONE,NONE,HIGH,336
-NETWORK,LOW,REQUIRED,LOW,LOW,LOW,NONE,291
-LOCAL,LOW,REQUIRED,NONE,HIGH,HIGH,HIGH,280
-NETWORK,LOW,NONE,LOW,HIGH,NONE,NONE,170
-NETWORK,HIGH,REQUIRED,NONE,HIGH,HIGH,HIGH,161
-NETWORK,LOW,NONE,NONE,LOW,NONE,NONE,153
-NETWORK,LOW,REQUIRED,HIGH,LOW,LOW,NONE,131
-LOCAL,LOW,NONE,LOW,HIGH,NONE,NONE,74
-LOCAL,HIGH,NONE,LOW,HIGH,NONE,NONE,67
-NETWORK,LOW,REQUIRED,NONE,NONE,HIGH,NONE,62
-NETWORK,LOW,REQUIRED,LOW,NONE,HIGH,NONE,5
-NETWORK,HIGH,REQUIRED,NONE,NONE,NONE,HIGH,4
 
 The clustering results serve to inform the annotation and classification process used in 4.2 and in future could provide the underlying framework for the identification and selection of Attack Vectors on an on-going basis.
-
-
 
 \subsection{Annotation Model for Classifying Text Data}
 Our data sets of descriptions for Threat Reports were extracted from the National Vulnerability Database which can be considered the gold standard of threat reporting and is being used nation wide. In the form of XML or CSV files, datasets can be imported into Annotation Model which is powered by the IBM Watson Knowledge Studio platform \footnote{https://www.ibm.com/watson/services/knowledge-studio/}.
@@ -150,7 +149,7 @@ A system type is a domain-specific ontology enriched with relationships. Since t
 
 It is notable that in real-world scenario, reports will only touch a few "boxes" of this crowded ontology. Therefore, the ontology has to be enriched with relationships that are context-preserving. Such relationships can be described directly by rules or indirectly by type \& sub-type specifications. The novelty of our work comes in the form of our own designed relationship rules, the overloading of the rules and the re-mapped hierarchy of the original NIST's ontology. The detailed description file of our type system (ontology with relationships) can be viewed at our Github repository \footnote{https://github.com/genterist/INCAT-public}. Further elaborations on this type system will be on the final full paper.
 
-In order to build ground truths, we started first with human annotators and manual annotation. Small sets of 50 entries each are extracted from our corpus of 1000 NVD threat reports in 2018. Sets can be specified to have some overlaps in order to support inter-annotation. Team members (except one) will work on their corresponding pre-assigned sets and manually annotate entities together with relationships. At the final step, the one who did not do any manual annotation will go over the results, resolve conflicts and publish annotated entries as ground truths.
+In order to build ground truths, we started first with human annotators and manual annotation. Small sets of 50 entries each are extracted from our corpus of ~8000 NVD threat reports in 2018. Sets can be specified to have some overlaps in order to support inter-annotation. Team members (except one) will work on their corresponding pre-assigned sets and manually annotate entities together with relationships. At the final step, the one who did not do any manual annotation will go over the results, resolve conflicts and publish annotated entries as ground truths.
 
 On the IBM Watson Knowledge Studio platform, we train and test our models using the manually annotated entries which are separated into training set (70\%), test set(23\%), and blind set(7\%). Training set is used to teach machine the domain specific knowledge through annotated entities and their relationships. Trained model will then perform on test set to produce test set machine results. Upon comparing test set machine results with human annotated results, the accuracy of the model can be defined. Blind set is used to test the system only after several iterations of training and testing. The end result of this process is an annotation model that can be deployed with other models which, in our case, happened to be IBM Knowledge Discovery.
 
