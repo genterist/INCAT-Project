@@ -166,7 +166,10 @@ In order to build ground truths, we started first with human annotators and manu
 On the IBM Watson Knowledge Studio platform, we train and test our models using the manually annotated entries which are separated into training set (70\%), test set(23\%), and blind set(7\%). Training set is used to teach machine the domain specific knowledge through annotated entities and their relationships. Trained model will then perform on test set to produce test set machine results. Upon comparing test set machine results with human annotated results, the accuracy of the model can be defined. Blind set is used to test the system only after several iterations of training and testing. The end result of this process is an annotation model that can be deployed with other models which, in our case, happened to be IBM Knowledge Discovery.
 
 \subsection{Training and Evaluating the Model}
-put content here
+Some of the challenges encountered by the human annotators on this project included the inflexibility and ambiguity in certain areas of the original ontology.  Frequently information was gleaned from the descriptions that there was no way to annotate unambiguously.  A more flexible ontology that could incorporate features of natural grammar would make this a much more powerful tool.  Making the overall model less hierarchical and adding additional roles and context clues would be a great improvement.
+
+While a few entities were relatively straightforward to identify and tag using certain key words other entities in our ontology were quite open to interpretation.  This made it unlikely for annotations to agree and contributed to a very poor initial success rate of the original model in the first iteration of annotations (11\%).  
+
 
 \section{Conclusion}
 InCAT is a new model for conducting cyber security training with three long term goals: (i) training efforts are initiated by emerging relevant threats and delivered first to the most vulnerable groups (ii) each training session must be promptly executed (iii) training results must be able to provide actionable intelligence to be employed by other systems such as enterprise risk management, enterprise threat intelligence, etc.
