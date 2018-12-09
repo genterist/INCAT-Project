@@ -39,17 +39,11 @@ Second, knowledge is not always translated into correct actions. For example, pe
 
 Finally, it is challenging to prepare people for potential unknown threats that have not happened yet, not mentioning cyber adversaries are incredibly creative, sometimes state sponsored.
 
-Abawajy \cite{Abawajy2014UserMethods} did a research on user preference of cyber security awareness methods of text-based, video-based and game-based among 60 participants. Even with a "low-tech" appearance, the performance of text-based education is on par with other "fancy" methods. Employees with work deadlines and projects actually prefer light-weight cyber security awareness delivery method that does not get in the way of their main jobs.
+Abawajy \cite{Abawajy2014UserMethods} did a research on user preference of cyber security awareness methods. Even with a "low-tech" appearance, the performance of text-based education is on par with other "fancy" methods. Pawlowski \cite{Pawlowski2016SocialDesign} presented a way to map learners' perceptions toward cyber security topics using data analytics. It was discovered that learners who have been exposed to several cyber security key terms and concepts, care very much about cyber security topics that may affect them personally. However, they lack awareness of the bigger picture which also includes national cyber infrastructure and cyber terrorism.
 
-Pawlowski \cite{Pawlowski2016SocialDesign} presented a way to map learners' perceptions toward cyber security topics using data analytics.  Especially of interest for high-impact cyber security training is finding out which topics are either high-interest (may affect individuals personally) or low-awareness (security blind spots) for learners.  Additionally, from a management perspective, how learners can be motivated to continue to learn and stay abreast of new threats is also of high importance.  It was discovered that learners have been exposed to several cyber security key terms and concepts, care very much about cyber security topics that may affect them personally, but that they lack awareness of the bigger picture which also includes national cyber infrastructure and cyber terrorism.
+Wei \cite{Wei2017IntegratingAssessment} adopts concept mapping (CM) as a tool to enhance the teaching and evaluating of Information System courses. By analyzing the topology of student CMs, instructors can design CM-based tasks, and grade student CMs against a master CM. Green \cite{Green2018TowardsSchemes} proposed an alternative to regular text-based machine learning approach with heavier emphasis on argument mining. The process involves steps of careful annotation of a selected corpus, building logic rules or relationships based on domain specific knowledge, and finally, inferring arguments. The paper made a case for more sophisticated content analysis method when dealing with complex contents such as biological research papers.
 
-Wei \cite{Wei2017IntegratingAssessment} adopts concept mapping (CM) as a tool to enhance the teaching and evaluating of Information System courses. By analyzing the topology of student CMs, instructors can design CM-based tasks, and grade student CMs against a master CM. While it was not explicitly mentioned in the paper, comparing CM is a very interesting way to identify how the concept map of a student can be changed over time, by education and other factors.
-
-Green \cite{Green2018TowardsSchemes} proposed an alternative to regular text-based machine learning approach with heavier emphasis on argument mining. The process involves steps of careful annotation of a selected corpus, building logic rules or relationships based on domain specific knowledge, and finally, inferring arguments. The paper made a case for more sophisticated content analysis method when dealing with complex contents such as biological research papers.
-
-Joshi \cite{Joshi2013ExtractingText} described a strategy of "combining" intelligence gathered from both structured and unstructured texts to form actionable intelligence in the domain of cyber security. The approach relies on a custom ontology for cyber security domain and a "concept extractor" built using various open-source products.
-
-Ferruci \cite{Ferrucci2010BuildingProject} wrote about IBM's billion dollar baby - Watson, and proves that within a large knowledge domain such as Jeopardy's, not only deep learning can understand human languages and response with thoughtful insights, but it can also perform reliably in real time. To sum up the strength and weaknesses of Watson, Deloitte did provide a very good report \cite{DeloitteDevelopment2015DisruptionWatson} in 2015. At the time of this paper, IBM Watson has been deployed commercially in various domains including health care, finance, insurance and so on.
+Joshi \cite{Joshi2013ExtractingText} described a strategy of "combining" intelligence gathered from both structured and unstructured texts to form actionable intelligence in the domain of cyber security. Ferruci \cite{Ferrucci2010BuildingProject} wrote about IBM's billion dollar baby - Watson, and proves that within a large knowledge domain such as Jeopardy's, not only deep learning can understand human languages and response with thoughtful insights, but it can also perform reliably in real time. To sum up the strength and weaknesses of Watson, Deloitte did provide a very good report \cite{DeloitteDevelopment2015DisruptionWatson} in 2015. At the time of this paper, IBM Watson has been deployed commercially in various domains including health care, finance, insurance and so on.
 
 \section{Methodology and Designs}
 InCat feedback loop includes 8 main steps as shown in Figure \ref{Figure:IncatDesign}. 
@@ -110,21 +104,21 @@ This relatively small set of features and possible values can have 1,296 differe
 
 Because the data is purely categorical common algorithms such as k-means are not recommended. \cite{}.  DBScan while helpful for removing outliers is not recommended for data with higher dimensions where Euclidean distance is less effective \cite{}.  The KModes module available for python was selected for the clustering implementation \cite{https://pypi.org/project/kmodes/}  because this package is readily available and specifically designed to work with categorical data.
 
-KMode defines clusters based on the number of matching categories between data points and it calculates the cost or dissimilarity of each set of clusters based on the sum of number of fields that are different between each record and its assigned centroid.  When validating the hyperparameters dozens of combinations of centroid intialization algorithms and the number of clusters were tried.  The possible range of number of clusters for this dataset is 1-236, however a more reasonable number of clusters would be in the range of 5-20.  The combination of the Huang initialization algorithm and ten clusters were selected for our final clustering based on the elbow in the graph of the validation data.  Because there is an element of randomness in the Huang algorithm the same exact results are not necessarily repeated in subsequent iterations.
+KMode defines clusters based on the number of matching categories between data points and it calculates the cost or dissimilarity of each set of clusters based on the sum of number of fields that are different between each record and its assigned centroid.  When validating the hyper-parameters dozens of combinations of centroid initialization algorithms and the number of clusters were tried.  The possible range of number of clusters for this dataset is 1-236, however a more reasonable number of clusters would be in the range of 5-20.  The combination of the Huang initialization algorithm and ten clusters were selected for our final clustering based on the elbow in the graph of the validation data.  Because there is an element of randomness in the Huang algorithm the same exact results are not necessarily repeated in subsequent iterations.
 
 The cost of our final clusters ended up being only 4473 which means that on average records differed from their assigned centroid by less than 1.  This shows that the data is naturally strongly clustered and makes it likely that targeting specific features for training would be effective.  Specifically, note that nearly all of the clusters indicate NETWORK for ATTACK VECTOR meaning that being on a local network or physical access to the machine is not typically a risk factor for these types of vulnerabilities.  In addition, almost half of the clusters indicate REQUIRED for USER ACTION.  Certainly in these cases risk would be mitigated by educating users about the specific actions NOT to take when faced with one of the associated vulnerabilities.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=12cm]{images/Hyperparameter.png}
+  \includegraphics[width=10cm]{images/Hyperparameter.png}
   \caption{Hyperparameter Comparison}
   \label{Figure:VulOntology}
 \end{figure}
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{ |l|p{1.1cm}|l|p{1.1cm}|p{1.4cm}|p{1.1cm}|p{1.4cm}|p{1.1cm}| } \hline
-\small{Attack Vector & Complexity & User Interaction & Privileges & Confidentiality Impact & Integrity Impact & Availability Impact & Count} \\ \hline
+\begin{tabular}{ |l|p{1.3cm}|l|p{1.1cm}|p{1.4cm}|p{1.1cm}|p{1.4cm}|p{1.1cm}| } \hline
+\small{Attack Vector & Comple-xity & User Interaction & Privi-leges & Confiden-tiality & Integrity & Availa-bility & Count} \\ \hline
 NETWORK & LOW & NONE & NONE & HIGH & HIGH & HIGH & 2394 \\
 NETWORK & LOW & NONE & NONE & NONE & HIGH & NONE & 853 \\
 NETWORK & LOW & NONE & NONE & HIGH & NONE & NONE & 711 \\
@@ -169,7 +163,6 @@ Our original annotation approach for vulnerability descriptions resulted in a 11
 
 While a few entities were relatively straightforward to identify and tag using certain key words other entities in our ontology were quite open to interpretation.  This made it unlikely for annotations to agree and contributed to a very poor initial success rate of the original model in the first iteration of annotations (11\%).  Watson is also very rigorous about calculating agreement and even trivial differences such as the inclusion of a space after a word could cause a conflict and decreased the Fleiss Kappa score of inter-annotator agreement.  
 
-\subsection{Training and Evaluating the Model}
 Some of the challenges encountered by the human annotators on this project included the inflexibility and ambiguity in certain areas of the original ontology.  Frequently information was gleaned from the descriptions that there was no way to annotate either unambiguously or at all.  A more flexible ontology that could incorporate features of natural grammar would make this a much more powerful tool.  Making the overall model less hierarchical and adding additional roles and context clues would be a great improvement.
 
 
