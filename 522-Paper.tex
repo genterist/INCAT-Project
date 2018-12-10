@@ -69,14 +69,14 @@ Threat reports are highly condensed data that relate to cyber threat development
 \label{table:1}
 \end{center}
 \label{table:1}
-\caption{Vulnerability Datasets, Sept 19, 2018} \\
+\caption{Vulnerability Datasets, Sept 19, 2018} 
 \end{table}
 
-The National Vulnerability Database (NVD) (source:  https://nvd.nist.gov/vuln/data-feeds) was already a high quality data set so minimal manipulation of the data was needed for pre-processing. Our source was the 2018 vulnerability .json file, CVE-2018, downloaded on September 19th (The file is continually updated). We then created two data sets one for the text analysis and the second for clustering analysis.  
+The National Vulnerability Database (NVD) (source:  https://nvd.nist.gov/vuln/data-feeds) was already a high quality data set so minimal manipulation of the data was needed for preprocessing. Our source was the 2018 vulnerability .json file, CVE-2018, downloaded on September 19th (The file is continually updated). We then created two data sets one for the text analysis and the second for clustering analysis.  
 
 For text analysis we extracted the CVE-ID number and Description for 8748 records.  For the categorical data we choose to work with the more updated Base Metrics 3.0 (BM3). The categorical data set used for clustering consists of all 6851 available 2018 NVD records with a completed BM3 section.  This data was not available for every record since it only becomes available after a vulnerability analysis is completed; records without completed BM3 fields were eliminated from clustering analysis.  BM3 features generally correspond to the vulnerability ontology used in the text analysis (see next section) which is based on the NIST's recommendations for Cyber Vulnerability Description ontology \cite{Booth2016DraftOntology}.
 
-To cluster the data we extracted the CVE-ID and categorical fields (listed in the table below along with their possible values).  Derivative fields such as baseScore and baseSeverity that are calculated from other fields and the fields product and vendor were eliminated from cluster processing.    
+To cluster the data we extracted the CVE-ID and categorical fields (listed in the table below along with their possible values).  Derivative fields such as \textit{Base Score} and \textit{Base Severity} that are calculated from other fields and the fields product and vendor were eliminated from cluster processing.    
 
 
 \subsection{Identifying Attack vectors}
@@ -94,13 +94,13 @@ Availability Impact & High, Low, None\\
 \hline
 \end{tabular}
 \end{center}
-\caption{Categorical Data} \\
+\caption{Categorical Data} 
 \label{table:1}
-\end{table}
+\end{table} 
 
 This relatively small set of features and possible values can have 1,296 different combinations.  However, a simple data query reveals that only 236 combinations were associated with any threats and 74.7\% of the vulnerabilities fall into just 16 unique combinations of features.  Finding meaningful clusters in the data would help to focus training on the most prevalent threat vectors and make the most efficient use of resources.  
 %%%%%citation fix needed
-Because the data is purely categorical common algorithms such as k-means are not recommended. \cite{}.  DBScan while helpful for removing outliers is not recommended for data with higher dimensions where Euclidean distance is less effective \cite{}.  The KModes module available for python was selected for the clustering implementation \cite{https://pypi.org/project/kmodes/}  because this package is readily available and specifically designed to work with categorical data.
+Because the data is purely categorical common algorithms such as k-means are not recommended. \cite{Tan2019}.  DBScan while helpful for removing outliers is not recommended for data with higher dimensions where Euclidean distance is less effective \cite{Tan2019}.  The KModes module available for python was selected for the clustering implementation \citeN{https://pypi.org/project/kmodes/}  because this package is readily available and specifically designed to work with categorical data.
 %%%%%%%
 
 KMode defines clusters based on the number of matching categories between data points and it calculates the cost or dissimilarity of each set of clusters based on the sum of number of fields that are different between each record and its assigned centroid.  When validating the hyper-parameters dozens of combinations of centroid initialization algorithms and the number of clusters were tried.  The possible range of number of clusters for this dataset is 1-236, however a more reasonable number of clusters would be in the range of 5-20.  The combination of the Huang initialization algorithm and ten clusters were selected for our final clustering based on the elbow in the graph of the validation data.  Because there is an element of randomness in the Huang algorithm the same exact results are not necessarily repeated in subsequent iterations.
